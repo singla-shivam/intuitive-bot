@@ -11,19 +11,18 @@ const {getData} = require('./api')
  * @param {string | string[]} products - Array of product ids of products to fetched. Can be single product id.
  * @return {Product | Product[]}
  */
-async function getProducts(products) {
+exports.getProducts = async function (products) {
   // if single product id is give
   if (typeof products === 'string') {
-    let products = await _createGetProductRequest(products)
-    return products[0]
+    return (await _createGetProductRequest(products))[0]
   } else {
     let promises = products.map(id => _createGetProductRequest(id))
-    return await Promise.all(promises)
+    return (await Promise.all(promises)).map(a => a[0])
   }
 }
 
 
-async function setCart() {
+exports.setCart = async function () {
 }
 
 /**
@@ -31,10 +30,12 @@ async function setCart() {
  * @param {string} sessionId
  * @return {Promise<{product_id: string, quantity: number}[]>}
  */
-async function getCart(sessionId) {
-  return await getData({
-    path: `sessions/${sessionId}/cart`
-  })
+exports.getCart = async function (sessionId) {
+  return (
+    await getData({
+      path: `sessions/${sessionId}/cart`
+    })
+  )[0]
 }
 
 /**
@@ -52,5 +53,3 @@ function _createGetProductRequest(id) {
     ]
   })
 }
-
-export { getProducts, setCart, getCart }

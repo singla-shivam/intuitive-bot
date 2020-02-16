@@ -16,7 +16,7 @@ const {firestore} = require('firebase-admin')
  * @type {Array}
  * @template T
  * @property {string} 0 - The path to compare
- * @property {string} 1 - The operation string (e.g "<", "<=", "==", ">", ">=").
+ * @property {string} 1 - The operation string '<' | '<=' | '==' | '>=' | '>' | 'array-contains' | 'in' | 'array-contains-any'.
  * @property {T} 2 - The value for comparison
  */
 
@@ -33,11 +33,11 @@ const {firestore} = require('firebase-admin')
  * @param options {OptionsAddData}
  * @return {Promise<T>}
  */
-async function addData(options) {
+exports.addData = async function (options) {
   const paths = options.path.split('/')
 
   // document id must be provided to delete the document
-  if (paths.length % 2 === 1 && (options.delete)) throw new Error("Document id must be provided to delete the document")
+  if (paths.length % 2 === 1 && (options.delete || options.update)) throw new Error("Document id must be provided to delete or update the document")
 
   // get the deepest referenced collection and document
   const [collection, document] = findCollectionDocument(paths)
@@ -53,7 +53,7 @@ async function addData(options) {
     if (options.delete) await d.delete()
     else if (options.update) await d.update(options.value)
     else await d.set(options.value, {
-        merge: options.merge
+        merge: options.merge || false
       })
 
     return options.value
@@ -68,27 +68,27 @@ async function addData(options) {
  * @param options {OptionsGetData}
  * @return {Promise<Data[]>} - return array of data
  */
-async function getData(options) {
+exports.getData = async function (options) {
   const paths = options.path.split('/')
   const isDocIdProvided = !(paths.length % 2)
 
-  if(options.andQueries && isDocIdProvided) throw new Error("And queries can not run on document")
+  if (options.andQueries && isDocIdProvided) throw new Error("And queries can not run on document")
 
   /** @type FirebaseFirestore.CollectionReference */
   let [collection, document] = findCollectionDocument(paths)
 
-  if(isDocIdProvided) {
+  if (isDocIdProvided) {
     const doc = await document.get()
     return [doc.data()]
   }
 
   /** @type FirebaseFirestore.Query */
-  let query  = collection
-  if(options.andQueries && options.andQueries.length !== 0) query = queriedCollection(collection, options.andQueries)
+  let query = collection
+  if (options.andQueries && options.andQueries.length !== 0) query = queriedCollection(collection, options.andQueries)
 
-  if(options.limit) query = collection.limit(options.limit)
+  if (options.limit) query = collection.limit(options.limit)
 
-  return  (await query.get()).docs
+  return (await query.get()).docs.map(d => d.data())
 }
 
 /**
@@ -97,7 +97,7 @@ async function getData(options) {
  * @return {(FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>|CollectionReference<DocumentData>|DocumentReference<T>)[]}
  */
 function findCollectionDocument(paths) {
-  let collection = firestore.collection(paths[0])
+  let collection = firestore().collection(paths[0])
   /** @type DocumentReference<T> */
   let document;
 
@@ -118,5 +118,3 @@ function queriedCollection(collection, andQueries) {
   andQueries.forEach(q => collection = collection.where(q[0], q[1], q[2]))
   return collection
 }
-
-export { addData, getData}
