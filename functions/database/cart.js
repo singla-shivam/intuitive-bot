@@ -26,7 +26,7 @@ exports.setCart = async function (sessionId, cart) {
  * @param {string} productId
  * @return {Promise<T>}
  */
-exports.removeCartItem = async function(sessionId, productId) {
+exports.removeCartItem = async function (sessionId, productId) {
   return await _removeCartItem(sessionId, productId)
 }
 
@@ -35,7 +35,7 @@ exports.removeCartItem = async function(sessionId, productId) {
  * @param {string} sessionId
  * @return {T[]}
  */
-exports.removeCartItem = async function(sessionId) {
+exports.removeCartItem = async function (sessionId) {
   // retrieve all the products present in the cart
   const products = await getData({
     path: `${CART_ROOT_COLLECTION}/${sessionId}/cart`
@@ -52,7 +52,7 @@ exports.removeCartItem = async function(sessionId) {
  * @param {string} quantity
  * @return {Promise<T>}
  */
-exports.setCartItem = async function(sessionId, productId, quantity) {
+exports.setCartItem = async function (sessionId, productId, quantity) {
   return await addData({
     path: `${CART_ROOT_COLLECTION}/${sessionId}/cart/${productId}`,
     value: {
