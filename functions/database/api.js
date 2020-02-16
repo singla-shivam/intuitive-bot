@@ -16,16 +16,15 @@ const {firestore} = require('firebase-admin')
  * @type {Array}
  * @template T
  * @property {string} 0 - The path to compare
- * @property {FirebaseFirestore.WhereFilterOp} 1 - The operation string (e.g "<", "<=", "==", ">", ">=").
+ * @property {string} 1 - The operation string (e.g "<", "<=", "==", ">", ">=").
  * @property {T} 2 - The value for comparison
  */
 
 /**
  * @typedef OptionsGetData
  * @template T
- *
  * @property {string} path
- * @property {number} limit
+ * @property {number} [limit]
  * @property {AndQuery[]} [andQueries]
  */
 
@@ -120,4 +119,4 @@ function queriedCollection(collection, andQueries) {
   return collection
 }
 
-export {addData}
+export { addData, getData}
