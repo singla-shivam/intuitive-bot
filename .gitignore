@@ -63,3 +63,7 @@ node_modules/
 
 # dotenv environment variables file
 .env
+
+# singla-shivam
+service-private-key.json
+setPrivateKey.sh
