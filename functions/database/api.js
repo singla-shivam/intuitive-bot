@@ -31,9 +31,10 @@ const {firestore} = require('firebase-admin')
 /**
  *
  * @param options {OptionsAddData}
+ * @param {boolean} addId=true - if true the function adds [id] field automatically if document_id is not provided
  * @return {Promise<T>}
  */
-exports.addData = async function (options) {
+exports.addData = async function (options, addId = true) {
   const paths = options.path.split('/')
 
   // document id must be provided to delete the document
@@ -49,7 +50,7 @@ exports.addData = async function (options) {
     if (paths.length % 2 === 0) d = document
     else d = collection.doc()
 
-    if (!options.value.id) options.value.id = d.id
+    if (addId && !options.value.id) options.value.id = d.id
     if (options.delete) await d.delete()
     else if (options.update) await d.update(options.value)
     else await d.set(options.value, {

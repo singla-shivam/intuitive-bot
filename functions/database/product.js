@@ -21,23 +21,6 @@ exports.getProducts = async function (products) {
   }
 }
 
-
-exports.setCart = async function () {
-}
-
-/**
- *
- * @param {string} sessionId
- * @return {Promise<{product_id: string, quantity: number}[]>}
- */
-exports.getCart = async function (sessionId) {
-  return (
-    await getData({
-      path: `sessions/${sessionId}/cart`
-    })
-  )[0]
-}
-
 /**
  * Create request to retrieve [Product] by its `product_id`
  * @template Data

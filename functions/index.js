@@ -9,6 +9,8 @@ const {Card, Suggestion} = require('dialogflow-fulfillment');
 const admin = require('firebase-admin')
 admin.initializeApp(functions.config().firebase)
 
+const { setCart } = require('./database/cart')
+
 process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
 
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
@@ -63,3 +65,14 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
   // intentMap.set('your intent name here', googleAssistantHandler);
   agent.handleRequest(intentMap);
 });
+
+exports.test = functions.https.onRequest(async (request, response) => {
+  const test = await setCart("asdf", [
+    {product_id: "1", quantity: 1},
+    {product_id: "2", quantity: 2},
+    {product_id: "3", quantity: 3},
+    {product_id: "4", quantity: 4},
+  ])
+
+  response.status(200).send(test)
+})
