@@ -1,19 +1,17 @@
 // See https://github.com/dialogflow/dialogflow-fulfillment-nodejs
 // for Dialogflow fulfillment library docs, samples, and to report issues
-// hello world comment 2
 'use strict';
 
 const functions = require('firebase-functions');
+const {cartDisplay} = require('./intent_handlers/cartDisplay')
 const {WebhookClient} = require('dialogflow-fulfillment');
 const {Card, Suggestion} = require('dialogflow-fulfillment');
-
-const admin = require('firebase-admin')
-admin.initializeApp(functions.config().firebase)
+var cart = [];
 
 process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
 
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
-  const agent = new WebhookClient({request, response});
+  const agent = new WebhookClient({ request, response });
   console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
   console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
 
@@ -60,6 +58,10 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
   let intentMap = new Map();
   intentMap.set('Default Welcome Intent', welcome);
   intentMap.set('Default Fallback Intent', fallback);
+  //intentMap.set('order.product', addItemsToCart);
+  intentMap.set('cart.display', cartDisplay);
+  //intentMap.set('cart.display - yes', confirmOrder);
+
   // intentMap.set('your intent name here', yourFunctionHandler);
   // intentMap.set('your intent name here', googleAssistantHandler);
   agent.handleRequest(intentMap);
