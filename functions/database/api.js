@@ -31,7 +31,8 @@ const {firestore} = require('firebase-admin')
 /**
  *
  * @param options {OptionsAddData}
- * @param {boolean} addId=true - if true the function adds [id] field automatically if document_id is not provided
+ * @param {boolean | string} addId=true - if true the function adds [id] field automatically if document_id is not provided
+ * if string is passed then value[stringValue] will be added if document_id is not provided
  * @return {Promise<T>}
  */
 exports.addData = async function (options, addId = true) {
@@ -50,7 +51,8 @@ exports.addData = async function (options, addId = true) {
     if (paths.length % 2 === 0) d = document
     else d = collection.doc()
 
-    if (addId && !options.value.id) options.value.id = d.id
+    if (addId === true && !options.value.id) options.value.id = d.id
+    else if(addId && typeof addId === "string" && !options.value.id) options.value[addId] = d.id
     if (options.delete) await d.delete()
     else if (options.update) await d.update(options.value)
     else await d.set(options.value, {
