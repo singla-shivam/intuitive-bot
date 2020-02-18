@@ -1,21 +1,19 @@
 const d = require('dialogflow')
 /**
  * @type {object}
- * @property {EntityTypesClient} v2.EntityTypesClient
+ * @property {v2.EntityTypesClient} EntityTypesClient
  */
-const dialogflow = d
+const dialogueFlow = d
 
 /** @type v2.EntityTypesClient */
-const entitiesClient = new dialogflow.EntityTypesClient();
+const entitiesClient = new dialogueFlow.EntityTypesClient();
 
 // if you delete and create new entities please update their UUID's here
 const PROJECT_ID = 'intuitivebot'
-const BRAND_ENTITY_ID = "0f38f58a-4b6a-49ae-91ea-c26fe4e12719"
 const TAG_ENTITY_ID = "56171131-b860-4fc9-b3bc-2af2ebc126b2"
 
 const agentPath = entitiesClient.projectAgentPath(PROJECT_ID)
 
-const brandEntityPath = entitiesClient.entityTypePath(PROJECT_ID, BRAND_ENTITY_ID)
 const tagEntityPath = entitiesClient.entityTypePath(PROJECT_ID, TAG_ENTITY_ID)
 
 /**
