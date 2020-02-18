@@ -7,7 +7,6 @@ exports.cartDisplay = async function (agent) {
   let cartItemDetails = await getProducts(cartItems.map(
     (item) => item.product_id))
 
-  console.log("cartDItemDetails", cartItemDetails)
   let totalItems = 0
   let totalPrice = 0
   let response
