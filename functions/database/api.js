@@ -52,7 +52,7 @@ exports.addData = async function (options, addId = true) {
     else d = collection.doc()
 
     if (addId === true && !options.value.id) options.value.id = d.id
-    else if(addId && typeof addId === "string" && !options.value.id) options.value[addId] = d.id
+    else if (addId && typeof addId === "string" && !options.value.id) options.value[addId] = d.id
     if (options.delete) await d.delete()
     else if (options.update) await d.update(options.value)
     else await d.set(options.value, {
@@ -67,11 +67,12 @@ exports.addData = async function (options, addId = true) {
 
 /**
  * Get data with and queries supported by firestore
- * @template Data
+ * @template T
  * @param options {OptionsGetData}
- * @return {Promise<Data[]>} - return array of data
+ * @return {Promise<[]>} - return array of data
  */
 exports.getData = async function (options) {
+  console.log("getData", options)
   const paths = options.path.split('/')
   const isDocIdProvided = !(paths.length % 2)
 

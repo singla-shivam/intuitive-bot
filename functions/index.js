@@ -10,8 +10,7 @@ const {WebhookClient} = require('dialogflow-fulfillment');
 const {Card, Suggestion} = require('dialogflow-fulfillment');
 
 const {updateTag} = require('./entities/tag')
-const {updateBrand} = require('./entities/brand')
-const {addData} = require('./database/api')
+const {addProduct} = require('./database/product')
 
 const admin = require('firebase-admin')
 admin.initializeApp(functions.config().firebase)
@@ -55,24 +54,17 @@ exports.entityUpdate = functions.firestore
     console.log("created product", JSON.stringify(data))
 
     return Promise.all([
-      updateBrand(data.brand),
-      updateTag(data.tags)
+      updateTag(Object.keys(data.tags))
     ])
   })
 
 exports.test = functions.https.onRequest(async (req, res) => {
   if (req.query["key"] === "JJypXlJ0tvLq5tbgx8TA") {
-    await addData({
-      path: "products",
-      value: {
-        brand: "nya_brand2",
-        name: "product_ka_nam",
-        tags: [
-          "tag1",
-          "tag2"
-        ],
-        variant: ["choco", "choco2"]
-      },
-    }, "product_id")
+    await addProduct("Dairy Milk", "Dairy Milk Silk Bubbly", 70, ["food", "chocolate"])
+    await addProduct("Dairy Milk", "Dairy Milk Fivestar 15gm", 10, ["food", "chocolate"])
+    await addProduct("KitKat", "KitKat 4pc", 20, ["food", "chocolate"])
+    await addProduct("CocaCola", "CocaCola 600ml", 40, ["food", "beverage", "cold drink", "soft drink"])
+    await addProduct("CocaCola", "CocaCola 1Litre", 60, ["food", "beverage", "cold drink", "soft drink"])
+    await addProduct("CocaCola", "CocaCola 2Litre", 110, ["food", "beverage", "cold drink", "soft drink"])
   }
 })

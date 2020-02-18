@@ -1,5 +1,7 @@
 const {entitiesClient, tagEntityPath, updateEntity} = require('./')
 
+// TODO add [2 litre] as synonym of 2litre
+// TODO add [4 pieces] as synonym of 4pc
 /**
  * @param {string[]} tags
  * @return {Promise<void>}
