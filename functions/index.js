@@ -3,17 +3,22 @@
 'use strict';
 
 const functions = require('firebase-functions');
-const {cartDisplay} = require('./intent_handlers/cartDisplay')
+const {cartDisplay} = require('./intent_handlers/cart/cartDisplay')
+const {choomantar} = require('./intent_handlers/productDiscovery/choomantar')
 const {WebhookClient} = require('dialogflow-fulfillment');
 const {Card, Suggestion} = require('dialogflow-fulfillment');
-var cart = [];
+const admin = require('firebase-admin')
+admin.initializeApp(functions.config().firebase)
+
 
 process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
 
-exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
+exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request, response) => {
   const agent = new WebhookClient({ request, response });
   console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
   console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
+
+  const sessionId = request.body.sessionId
 
   function welcome(agent) {
     agent.add(`Welcome to my agent!`);
@@ -60,9 +65,10 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
   intentMap.set('Default Fallback Intent', fallback);
   //intentMap.set('order.product', addItemsToCart);
   intentMap.set('cart.display', cartDisplay);
+  intentMap.set('choomantar', choomantar);
   //intentMap.set('cart.display - yes', confirmOrder);
 
   // intentMap.set('your intent name here', yourFunctionHandler);
   // intentMap.set('your intent name here', googleAssistantHandler);
-  agent.handleRequest(intentMap);
+  await agent.handleRequest(intentMap);
 });

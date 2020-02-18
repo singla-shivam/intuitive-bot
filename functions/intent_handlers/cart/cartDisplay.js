@@ -1,4 +1,4 @@
-const {getProducts} = require("../database/product");
+const {getProducts} = require("../../database/product");
 
 exports.cartDisplay = async function (agent){
     console.log("cartDisplay Invoked");
