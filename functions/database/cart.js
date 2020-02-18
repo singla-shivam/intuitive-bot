@@ -85,5 +85,5 @@ exports.getCart = async function (sessionId) {
     await getData({
       path: `sessions/${sessionId}/cart`
     })
-  )[0]
+  )
 }
