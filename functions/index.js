@@ -60,6 +60,11 @@ exports.entityUpdate = functions.firestore
 
 exports.test = functions.https.onRequest(async (req, res) => {
   if (req.query["key"] === "JJypXlJ0tvLq5tbgx8TA") {
-    let result = await addProduct("Dairy Milk", "Dairy Milk Silk Bubbly", 70, ["food", "chocolate"])
+    await addProduct("Dairy Milk", "Dairy Milk Silk Bubbly", 70, ["food", "chocolate"])
+    await addProduct("Dairy Milk", "Dairy Milk Fivestar 15gm", 10, ["food", "chocolate"])
+    await addProduct("KitKat", "KitKat 4pc", 20, ["food", "chocolate"])
+    await addProduct("CocaCola", "CocaCola 600ml", 40, ["food", "beverage", "cold drink", "soft drink"])
+    await addProduct("CocaCola", "CocaCola 1Litre", 60, ["food", "beverage", "cold drink", "soft drink"])
+    await addProduct("CocaCola", "CocaCola 2Litre", 110, ["food", "beverage", "cold drink", "soft drink"])
   }
 })
