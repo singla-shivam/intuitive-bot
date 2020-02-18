@@ -4,13 +4,14 @@
 'use strict';
 
 const functions = require('firebase-functions');
-const {cartDisplay} = require('./intent_handlers/cart/cartDisplay')
-const {choomantar} = require('./intent_handlers/productDiscovery/choomantar')
-const {WebhookClient} = require('dialogflow-fulfillment');
-const {Card, Suggestion} = require('dialogflow-fulfillment');
+const { cartDisplay } = require('./intent_handlers/cart/cartDisplay')
+const { choomantar } = require('./intent_handlers/productDiscovery/choomantar')
+const { order } = require('./intent_handlers/productDiscovery/order');
+const { WebhookClient } = require('dialogflow-fulfillment');
+const { Card, Suggestion } = require('dialogflow-fulfillment');
 
-const {updateTag} = require('./entities/tag')
-const {addProduct} = require('./database/product')
+const { updateTag } = require('./entities/tag')
+const { addProduct } = require('./database/product')
 
 const admin = require('firebase-admin')
 admin.initializeApp(functions.config().firebase)
@@ -23,7 +24,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
 
   function welcome(agent) {
-    agent.add(`Welcome to my agent!`);
+    agent.add(`How may I help you.`);
   }
 
   function fallback(agent) {
@@ -35,6 +36,9 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   let intentMap = new Map();
   intentMap.set('Default Welcome Intent', welcome);
   intentMap.set('Default Fallback Intent', fallback);
+  //NTC PART Begin
+  intentMap.set('Order', order);
+  //NTC PART END
   //intentMap.set('order.product', addItemsToCart);
   intentMap.set('cart.display', cartDisplay);
   intentMap.set('choomantar', choomantar);
