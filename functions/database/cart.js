@@ -46,7 +46,7 @@ exports.clearCart = async function (sessionId) {
 }
 
 /**
- * Updates quantity of a product of the cart associated with [sessionId]
+ * Adds a product to the cart associated with [sessionId] and overwrites if it already exits
  * @param {string} sessionId
  * @param {string} productId
  * @param {string} quantity
@@ -64,7 +64,7 @@ exports.addCartItem = async function (sessionId, productId, quantity, update = f
 }
 
 /**
- *
+ * Updates a product to the cart associated with [sessionId]
  * @param {string} sessionId
  * @param {string} productId
  * @param {string} quantity
