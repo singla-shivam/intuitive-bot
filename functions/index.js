@@ -10,7 +10,6 @@ const {WebhookClient} = require('dialogflow-fulfillment');
 const {Card, Suggestion} = require('dialogflow-fulfillment');
 
 const {updateTag} = require('./entities/tag')
-const {updateBrand} = require('./entities/brand')
 const {addData} = require('./database/api')
 
 const admin = require('firebase-admin')
@@ -55,7 +54,6 @@ exports.entityUpdate = functions.firestore
     console.log("created product", JSON.stringify(data))
 
     return Promise.all([
-      updateBrand(data.brand),
       updateTag(data.tags)
     ])
   })
