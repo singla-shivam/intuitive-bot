@@ -72,6 +72,7 @@ exports.addData = async function (options, addId = true) {
  * @return {Promise<Data[]>} - return array of data
  */
 exports.getData = async function (options) {
+  console.log("getData", options)
   const paths = options.path.split('/')
   const isDocIdProvided = !(paths.length % 2)
 

@@ -42,4 +42,4 @@ async function updateEntity(entity, values, synonyms) {
 }
 
 
-module.exports = {entitiesClient, agentPath, brandEntityPath, tagEntityPath, updateEntity}
+module.exports = {entitiesClient, agentPath, tagEntityPath, updateEntity}

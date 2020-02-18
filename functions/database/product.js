@@ -12,6 +12,7 @@ const {getData} = require('./api')
  * @return {Product | Product[]}
  */
 exports.getProducts = async function (products) {
+  console.log("getProducts", products)
   // if single product id is give
   if (typeof products === 'string') {
     return (await _createGetProductRequest(products))[0]
@@ -29,6 +30,7 @@ exports.getProducts = async function (products) {
  * @private
  */
 function _createGetProductRequest(id) {
+  console.log("_createGetProductRequest", id)
   return getData({
     path: "products",
     andQueries: [

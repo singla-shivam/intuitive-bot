@@ -54,11 +54,13 @@ exports.clearCart = async function (agent) {
  */
 exports.setCartItem = async function (agent, productId, quantity) {
   return await addData({
-    path: `${CART_ROOT_COLLECTION}/${_getSessionId(agent)}/cart/${productId}`,
-    value: {
-      quantity
+      path: `${CART_ROOT_COLLECTION}/${_getSessionId(agent)}/cart/${productId}`,
+      value: {
+        quantity
+      }
     },
-  })
+    "product_id"
+  )
 }
 
 /**
@@ -88,13 +90,13 @@ function _getSessionId(agent) {
 
 /**
  *
- * @param {string} sessionId
+ * @param {WebhookClient} agent
  * @return {Promise<{product_id: string, quantity: number}[]>}
  */
-exports.getCart = async function (sessionId) {
+exports.getCart = async function (agent) {
   return (
     await getData({
-      path: `sessions/${sessionId}/cart`
+      path: `sessions/${_getSessionId(agent)}/cart`
     })
   )
 }

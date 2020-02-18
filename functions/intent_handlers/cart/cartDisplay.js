@@ -3,10 +3,11 @@ const {getCart} = require("../../database/cart");
 
 exports.cartDisplay = async function (agent) {
   console.log("cartDisplay Invoked");
-  let sessionId = agent.request_.body.session
-  let cartItems = await getCart(sessionId) // returns {product_id: string, quantity: number}[]
+  let cartItems = await getCart(agent) // returns {product_id: string, quantity: number}[]
   let cartItemDetails = await getProducts(cartItems.map(
     (item) => item.product_id))
+
+  console.log("cartDItemDetails", cartItemDetails)
   let totalItems = 0
   let totalPrice = 0
   let response
@@ -17,8 +18,10 @@ exports.cartDisplay = async function (agent) {
   }
   // Generate response for agent
   if (totalItems) {
-    response = `You have total ${totalItems} item${totalItems > 1 ? 's' : ''} in your cart amounting to Rs. ${totalPrice}.\n`
-    response += cartItemDetails.map((item, index) => `${index + 1}. ${item.name}, Qty:${cartItems[index].quantity}`).join('\n')
+    response = `You have total ${totalItems} item${totalItems > 1 ? 's' : ''} in your cart amounting to Rs. ${totalPrice}`
+    cartItemDetails.forEach((item, index) =>
+      agent.add(`${index + 1}. ${item.name}, Qty: ${cartItems[index].quantity}`)
+    )
   } else {
     response = "Your cart is empty. Ask me to add something?"
   }
