@@ -50,16 +50,28 @@ exports.clearCart = async function (sessionId) {
  * @param {string} sessionId
  * @param {string} productId
  * @param {string} quantity
+ * @param {boolean} [update=false]
  * @return {Promise<T>}
  */
-exports.setCartItem = async function (sessionId, productId, quantity) {
+exports.addCartItem = async function (sessionId, productId, quantity, update = false) {
   return await addData({
     path: `${CART_ROOT_COLLECTION}/${sessionId}/cart/${productId}`,
     value: {
       quantity
     },
-    update: true
+    update: update
   })
+}
+
+/**
+ *
+ * @param {string} sessionId
+ * @param {string} productId
+ * @param {string} quantity
+ * @return {Promise<T>}
+ */
+exports.updateCartItem = async function (sessionId, productId, quantity) {
+  return addCartItem(sessionId, productId, quantity, true)
 }
 
 /**
