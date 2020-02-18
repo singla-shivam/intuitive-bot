@@ -1,4 +1,4 @@
-const {getData} = require('./api')
+const {getData, addData} = require('./api')
 
 /**
  * @typedef Product
@@ -20,6 +20,39 @@ exports.getProducts = async function (products) {
     let promises = products.map(id => _createGetProductRequest(id))
     return (await Promise.all(promises)).map(a => a[0])
   }
+}
+
+/**
+ *
+ * @param {string} brand
+ * @param {string} name
+ * @param {number} price
+ * @param {string[]} tags
+ * @return {Promise<T>}
+ */
+exports.addProduct = async function (brand, name, price, tags) {
+  tags = tags.concat(name.split(' ').map(a => a.toLowerCase()))
+    .concat(brand.split(' ').map(a => a.toLowerCase()))
+
+  const tagsSet = new Set(tags)
+  console.log(tags)
+  console.log(tagsSet)
+  const tagsMap = {}
+  tagsSet.forEach(tag => tagsMap[tag] = true)
+
+  const product = {
+    brand,
+    name,
+    price,
+    tags: tagsMap
+  }
+  return await addData(
+    {
+      path: "products",
+      value: product
+    },
+    "product_id"
+  )
 }
 
 /**

@@ -10,8 +10,7 @@ const {WebhookClient} = require('dialogflow-fulfillment');
 const {Card, Suggestion} = require('dialogflow-fulfillment');
 
 const {updateTag} = require('./entities/tag')
-const {addData} = require('./database/api')
-const {findProductsByTags} = require('./database/product')
+const {addProduct} = require('./database/product')
 
 const admin = require('firebase-admin')
 admin.initializeApp(functions.config().firebase)
@@ -55,14 +54,12 @@ exports.entityUpdate = functions.firestore
     console.log("created product", JSON.stringify(data))
 
     return Promise.all([
-      updateTag(data.tags)
+      updateTag(Object.keys(data.tags))
     ])
   })
 
 exports.test = functions.https.onRequest(async (req, res) => {
   if (req.query["key"] === "JJypXlJ0tvLq5tbgx8TA") {
-    // let result = await findProductsByTags(["tag1"], ["PwjRkaW8CYjDNxEHg2EX"])
-    // console.log(result)
-    // res.send(JSON.stringify(result))
+    let result = await addProduct("Dairy Milk", "Dairy Milk Silk Bubbly", 70, ["food", "chocolate"])
   }
 })
