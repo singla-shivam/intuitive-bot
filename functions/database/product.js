@@ -23,6 +23,27 @@ exports.getProducts = async function (products) {
 }
 
 /**
+ *
+ * @param {string[]} tags
+ * @param {string[]} [productIds]
+ * @returns {Promise<Product[]>}
+ */
+exports.findProductsByTags = async function (tags, productIds) {
+  /** @type AndQuery[]*/
+  const andQueries = tags.map(tag => [`tags.${tag}`, "==", true])
+
+  if (productIds) {
+    // get and queries correspond to productIds
+    /** @type AndQuery[][]*/
+    const productsAndQueries = productIds.map(id => [...andQueries, ["product_id", "==", id]])
+    // get product matching with each productIds and tags
+    /** @type ?Promise<Product[]>[]*/
+    const promises = productsAndQueries.map(andQueries => _createTagQuery(andQueries))
+    return (await Promise.all(promises)).map(p => p[0])
+  } else return await _createTagQuery(andQueries)
+}
+
+/**
  * Create request to retrieve [Product] by its `product_id`
  * @template Data
  * @param {string} id
@@ -36,5 +57,18 @@ function _createGetProductRequest(id) {
     andQueries: [
       ["product_id", "==", id]
     ]
+  })
+}
+
+/**
+ *
+ * @param {AndQuery[]} andQueries
+ * @returns Promise<Product[]>
+ * @private
+ */
+function _createTagQuery(andQueries) {
+  return getData({
+    path: "products",
+    andQueries: andQueries
   })
 }

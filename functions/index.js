@@ -11,6 +11,7 @@ const {Card, Suggestion} = require('dialogflow-fulfillment');
 
 const {updateTag} = require('./entities/tag')
 const {addData} = require('./database/api')
+const {findProductsByTags} = require('./database/product')
 
 const admin = require('firebase-admin')
 admin.initializeApp(functions.config().firebase)
@@ -60,17 +61,8 @@ exports.entityUpdate = functions.firestore
 
 exports.test = functions.https.onRequest(async (req, res) => {
   if (req.query["key"] === "JJypXlJ0tvLq5tbgx8TA") {
-    await addData({
-      path: "products",
-      value: {
-        brand: "nya_brand2",
-        name: "product_ka_nam",
-        tags: [
-          "tag1",
-          "tag2"
-        ],
-        variant: ["choco", "choco2"]
-      },
-    }, "product_id")
+    // let result = await findProductsByTags(["tag1"], ["PwjRkaW8CYjDNxEHg2EX"])
+    // console.log(result)
+    // res.send(JSON.stringify(result))
   }
 })
