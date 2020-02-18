@@ -35,7 +35,7 @@ exports.removeCartItem = async function (sessionId, productId) {
  * @param {string} sessionId
  * @return {T[]}
  */
-exports.removeCartItem = async function (sessionId) {
+exports.clearCart = async function (sessionId) {
   // retrieve all the products present in the cart
   const products = await getData({
     path: `${CART_ROOT_COLLECTION}/${sessionId}/cart`
@@ -46,35 +46,20 @@ exports.removeCartItem = async function (sessionId) {
 }
 
 /**
- * Add the a product to the cart associated with [sessionId]
- * Overwrites if it already exists
- * @param {string} sessionId
- * @param {string} productId
- * @param {string} quantity
- * @param {boolean} [update=false]
- * @return {Promise<T>}
- */
-exports.addCartItem = async function (sessionId, productId, quantity, update = false) {
-  return await addData({
-    path: `${CART_ROOT_COLLECTION}/${sessionId}/cart/${productId}`,
-    value: {
-      quantity
-    },
-    update: update
-  })
-}
-
-/**
  * Updates quantity of a product of the cart associated with [sessionId]
  * @param {string} sessionId
  * @param {string} productId
  * @param {string} quantity
  * @return {Promise<T>}
  */
-exports.updateCartItem = async function (sessionId, productId, quantity) {
-  return addCartItem(sessionId, productId, quantity, true)
+exports.setCartItem = async function (sessionId, productId, quantity) {
+  return await addData({
+    path: `${CART_ROOT_COLLECTION}/${sessionId}/cart/${productId}`,
+    value: {
+      quantity
+    },
+  })
 }
-
 
 /**
  *
