@@ -9,17 +9,17 @@ const {getData, addData} = require('./api')
 /**
  *
  * @param {string | string[]} products - Array of product ids of products to fetched. Can be single product id.
- * @return {Product | Product[]}
+ * @return {Product | Product[]} - returns product or array of products according to `products`
+ * if the requested product(s) is not found returns null if single id was provided
+ * or empty array if multiple ids were provided
  */
 exports.getProducts = async function (products) {
-  console.log("getProducts", products)
   // if single product id is give
   if (typeof products === 'string') {
-    return (await _createGetProductRequest(products))[0]
-  } else {
-    let promises = products.map(id => _createGetProductRequest(id))
-    return (await Promise.all(promises)).map(a => a[0])
+    let p = await _createGetProductRequest(products)
+    return p.length === 0 ? null : p[0]
   }
+  else return (await _createGetProductRequest(products, 'in'))
 }
 
 /**
@@ -65,30 +65,30 @@ exports.findProductsByTags = async function (tags, productIds) {
   /** @type AndQuery[]*/
   const andQueries = tags.map(tag => [`tags.${tag}`, "==", true])
 
-  if (productIds) {
+  if (productIds && productIds.length > 0) {
     // get and queries correspond to productIds
     /** @type AndQuery[][]*/
     const productsAndQueries = productIds.map(id => [...andQueries, ["product_id", "==", id]])
     // get product matching with each productIds and tags
     /** @type ?Promise<Product[]>[]*/
     const promises = productsAndQueries.map(andQueries => _createTagQuery(andQueries))
-    return (await Promise.all(promises)).map(p => p[0])
+    return (await Promise.all(promises)).filter(p => p[0]).map(p => p[0])
   } else return await _createTagQuery(andQueries)
 }
 
 /**
  * Create request to retrieve [Product] by its `product_id`
  * @template Data
- * @param {string} id
+ * @param {string | string[]} ids
+ * @param {string} [operator='==']
  * @return {Promise<Data[]>}
  * @private
  */
-function _createGetProductRequest(id) {
-  console.log("_createGetProductRequest", id)
+function _createGetProductRequest(ids, operator = '==') {
   return getData({
     path: "products",
     andQueries: [
-      ["product_id", "==", id]
+      ["product_id", operator, ids]
     ]
   })
 }
