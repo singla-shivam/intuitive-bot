@@ -42,6 +42,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   //NTC PART END
   //intentMap.set('order.product', addItemsToCart);
   intentMap.set('cart.display', cartDisplay);
+  intentMap.set('cart.changeQty', cartChangeQty);
   intentMap.set('choomantar', choomantar);
   //intentMap.set('cart.display - yes', confirmOrder);
 

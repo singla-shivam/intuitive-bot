@@ -18,7 +18,7 @@ exports.getProducts = async function (products) {
   if (typeof products === 'string') {
     let p = await _createGetProductRequest(products)
     return p.length === 0 ? null : p[0]
-  }
+  } else if (typeof products === 'object' && products.length === 0) return [] //@author satyamcse
   else return (await _createGetProductRequest(products, 'in'))
 }
 
