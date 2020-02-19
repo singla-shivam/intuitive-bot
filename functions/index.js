@@ -6,7 +6,7 @@
 const functions = require('firebase-functions');
 const { cartDisplay } = require('./intent_handlers/cart/cartDisplay')
 const { choomantar } = require('./intent_handlers/productDiscovery/choomantar')
-const { order } = require('./intent_handlers/productDiscovery/order');
+const { order, _orderTests } = require('./intent_handlers/productDiscovery/order');
 const { WebhookClient } = require('dialogflow-fulfillment');
 const { Card, Suggestion } = require('dialogflow-fulfillment');
 
@@ -70,5 +70,8 @@ exports.test = functions.https.onRequest(async (req, res) => {
     await addProduct("CocaCola", "CocaCola 600ml", 40, ["food", "beverage", "cold drink", "soft drink"])
     await addProduct("CocaCola", "CocaCola 1Litre", 60, ["food", "beverage", "cold drink", "soft drink"])
     await addProduct("CocaCola", "CocaCola 2Litre", 110, ["food", "beverage", "cold drink", "soft drink"])
+    _orderTests();
+
+
   }
 })
