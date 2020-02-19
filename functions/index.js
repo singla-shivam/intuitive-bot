@@ -24,7 +24,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
 
   function welcome(agent) {
-    agent.add(`Welcome to my agent!`);
+    agent.add(`How may I help you.`);
   }
 
   function fallback(agent) {
@@ -36,6 +36,9 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   let intentMap = new Map();
   intentMap.set('Default Welcome Intent', welcome);
   intentMap.set('Default Fallback Intent', fallback);
+  //NTC PART Begin
+  intentMap.set('Order', order);
+  //NTC PART END
   //intentMap.set('order.product', addItemsToCart);
   intentMap.set('cart.display', cartDisplay);
   intentMap.set('choomantar', choomantar);
