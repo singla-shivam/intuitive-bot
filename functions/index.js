@@ -4,8 +4,9 @@
 'use strict';
 
 const functions = require('firebase-functions');
-const { cartDisplay } = require('./intent_handlers/cart/cartDisplay')
-const { choomantar } = require('./intent_handlers/productDiscovery/choomantar')
+const {cartDisplay} = require('./intent_handlers/cart/cartDisplay')
+const {cartChangeQty} = require("./intent_handlers/cart/changeQty");
+const {choomantar} = require('./intent_handlers/productDiscovery/choomantar')
 const { order } = require('./intent_handlers/productDiscovery/order');
 const { WebhookClient } = require('dialogflow-fulfillment');
 const { Card, Suggestion } = require('dialogflow-fulfillment');
@@ -41,6 +42,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   //NTC PART END
   //intentMap.set('order.product', addItemsToCart);
   intentMap.set('cart.display', cartDisplay);
+  intentMap.set('cart.changeQty', cartChangeQty);
   intentMap.set('choomantar', choomantar);
   //intentMap.set('cart.display - yes', confirmOrder);
 

@@ -10,6 +10,7 @@ exports.cartDisplay = async function (agent) {
   let totalItems = 0
   let totalPrice = 0
   let response
+  console.log(cartItems, cartItemDetails)
   // Calculate total price and no of items
   for (let i = 0; i < cartItems.length; i++) {
     totalItems += cartItems[i].quantity
