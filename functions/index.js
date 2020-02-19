@@ -4,14 +4,17 @@
 'use strict';
 
 const functions = require('firebase-functions');
-const { cartDisplay } = require('./intent_handlers/cart/cartDisplay')
-const { choomantar } = require('./intent_handlers/productDiscovery/choomantar')
-const { order, _orderTests } = require('./intent_handlers/productDiscovery/order');
-const { WebhookClient } = require('dialogflow-fulfillment');
-const { Card, Suggestion } = require('dialogflow-fulfillment');
+const {cartDisplay} = require('./intent_handlers/cart/cartDisplay')
+const {choomantar} = require('./intent_handlers/productDiscovery/choomantar')
+const {WebhookClient} = require('dialogflow-fulfillment');
+// const {Card, Suggestion} = require('dialogflow-fulfillment');
 
-const { updateTag } = require('./entities/tag')
-const { addProduct } = require('./database/product')
+const { order, _orderTests } = require('./intent_handlers/productDiscovery/order');
+
+
+const {updateTag} = require('./entities/tag')
+// const {addProduct, findProductsByTags} = require('./database/product')
+// const {getData} = require('./database/api')
 
 const admin = require('firebase-admin')
 admin.initializeApp(functions.config().firebase)
@@ -64,13 +67,19 @@ exports.entityUpdate = functions.firestore
 
 exports.test = functions.https.onRequest(async (req, res) => {
   if (req.query["key"] === "JJypXlJ0tvLq5tbgx8TA") {
-    await addProduct("Dairy Milk", "Dairy Milk Silk Bubbly", 70, ["food", "chocolate"])
-    await addProduct("Dairy Milk", "Dairy Milk Fivestar 15gm", 10, ["food", "chocolate"])
-    await addProduct("KitKat", "KitKat 4pc", 20, ["food", "chocolate"])
-    await addProduct("CocaCola", "CocaCola 600ml", 40, ["food", "beverage", "cold drink", "soft drink"])
-    await addProduct("CocaCola", "CocaCola 1Litre", 60, ["food", "beverage", "cold drink", "soft drink"])
-    await addProduct("CocaCola", "CocaCola 2Litre", 110, ["food", "beverage", "cold drink", "soft drink"])
-    _orderTests();
+
+    // await addProduct("Dairy Milk", "Dairy Milk Silk Bubbly", 70, ["food", "chocolate"])
+    // await addProduct("Dairy Milk", "Dairy Milk Fivestar 15gm", 10, ["food", "chocolate"])
+    // await addProduct("KitKat", "KitKat 4pc", 20, ["food", "chocolate"])
+    // await addProduct("CocaCola", "CocaCola 600ml", 40, ["food", "beverage", "cold drink", "soft drink"])
+    // await addProduct("CocaCola", "CocaCola 1Litre", 60, ["food", "beverage", "cold drink", "soft drink"])
+    // await addProduct("CocaCola", "CocaCola 2Litre", 110, ["food", "beverage", "cold drink", "soft drink"])
+
+    // let result = await getData({
+    //   path: "products/2YR9z8moKlknDkXwomVk"
+    // })
+    // console.log("result", result)
+    // _orderTests();
 
 
   }

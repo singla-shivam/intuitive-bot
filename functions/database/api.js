@@ -82,8 +82,8 @@ exports.getData = async function (options) {
   let [collection, document] = findCollectionDocument(paths)
 
   if (isDocIdProvided) {
-    const doc = await document.get()
-    return [doc.data()]
+    const data = (await document.get()).data()
+    return data ? [data] : []
   }
 
   /** @type FirebaseFirestore.Query */
