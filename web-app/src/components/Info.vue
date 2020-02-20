@@ -26,7 +26,7 @@
     },
     methods: {
       scrollDown() {
-        window.scroll(0, 1000)
+        window.scroll(0, 10000)
       }
     }
   }
