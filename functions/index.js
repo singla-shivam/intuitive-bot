@@ -9,6 +9,9 @@ const {choomantar} = require('./intent_handlers/productDiscovery/choomantar')
 const {WebhookClient} = require('dialogflow-fulfillment');
 // const {Card, Suggestion} = require('dialogflow-fulfillment');
 
+const { order, _orderTests } = require('./intent_handlers/productDiscovery/order');
+
+
 const {updateTag} = require('./entities/tag')
 // const {addProduct, findProductsByTags} = require('./database/product')
 // const {getData} = require('./database/api')
@@ -24,7 +27,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
 
   function welcome(agent) {
-    agent.add(`Welcome to my agent!`);
+    agent.add(`How may I help you.`);
   }
 
   function fallback(agent) {
@@ -36,6 +39,9 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   let intentMap = new Map();
   intentMap.set('Default Welcome Intent', welcome);
   intentMap.set('Default Fallback Intent', fallback);
+  //NTC PART Begin
+  intentMap.set('Order', order);
+  //NTC PART END
   //intentMap.set('order.product', addItemsToCart);
   intentMap.set('cart.display', cartDisplay);
   intentMap.set('choomantar', choomantar);
@@ -61,6 +67,7 @@ exports.entityUpdate = functions.firestore
 
 exports.test = functions.https.onRequest(async (req, res) => {
   if (req.query["key"] === "JJypXlJ0tvLq5tbgx8TA") {
+
     // await addProduct("Dairy Milk", "Dairy Milk Silk Bubbly", 70, ["food", "chocolate"])
     // await addProduct("Dairy Milk", "Dairy Milk Fivestar 15gm", 10, ["food", "chocolate"])
     // await addProduct("KitKat", "KitKat 4pc", 20, ["food", "chocolate"])
@@ -72,5 +79,8 @@ exports.test = functions.https.onRequest(async (req, res) => {
     //   path: "products/2YR9z8moKlknDkXwomVk"
     // })
     // console.log("result", result)
+    // _orderTests();
+
+
   }
 })
