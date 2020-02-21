@@ -4,11 +4,11 @@
     <LoresIspum/>
     <Developers/>
     <div class="scrollDown">
-      <div class="arrow" @click="scrollDown">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+<!--      <div class="arrow" @click="scrollDown">-->
+<!--        <span></span>-->
+<!--        <span></span>-->
+<!--        <span></span>-->
+<!--      </div>-->
     </div>
 
   </div>

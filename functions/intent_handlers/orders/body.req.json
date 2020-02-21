@@ -1,0 +1,36 @@
+{
+  "responseId": "f7ba8869-8f8a-4ea7-996a-3f413632f51d-7f245a81",
+  "queryResult": {
+    "queryText": "asdfghjkl",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            ""
+          ]
+        }
+      }
+    ],
+    "outputContexts": [
+      {
+        "name": "projects/intuitivebot/agent/sessions/3c91595d-99ca-2b90-59ef-31a2a2d00c34/contexts/__system_counters__",
+        "parameters": {
+          "no-input": 0,
+          "no-match": 0
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/intuitivebot/agent/intents/41664582-85ba-461e-ad4c-9701e75b40f7",
+      "displayName": "Orders.list"
+    },
+    "intentDetectionConfidence": 1,
+    "languageCode": "en"
+  },
+  "originalDetectIntentRequest": {
+    "payload": {}
+  },
+  "session": "projects/intuitivebot/agent/sessions/3c91595d-99ca-2b90-59ef-31a2a2d00c34"
+}

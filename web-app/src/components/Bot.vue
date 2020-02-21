@@ -1,10 +1,10 @@
 <template>
   <div class="bot">
-    <iframe
-      class="iframe"
-      allow="microphone;"
-      src="https://console.dialogflow.com/api-client/demo/embedded/intuitiveBot">
-    </iframe>
+<!--    <iframe-->
+<!--      class="iframe"-->
+<!--      allow="microphone;"-->
+<!--      src="https://console.dialogflow.com/api-client/demo/embedded/intuitiveBot">-->
+<!--    </iframe>-->
   </div>
 </template>
 
