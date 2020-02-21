@@ -26,6 +26,7 @@ const {firestore} = require('firebase-admin')
  * @property {string} path
  * @property {number} [limit]
  * @property {AndQuery[]} [andQueries]
+ * @property {{field: string, direction: OrderByDirection}} [orderBy]
  */
 
 /**
@@ -89,8 +90,13 @@ exports.getData = async function (options) {
   /** @type FirebaseFirestore.Query */
   let query = collection
   if (options.andQueries && options.andQueries.length !== 0) query = queriedCollection(collection, options.andQueries)
+  if (options.orderBy) {
+    options.orderBy.direction
+      ? query = query.orderBy(options.orderBy.field, options.orderBy.direction)
+      : query = query.orderBy(options.orderBy.field)
+  }
 
-  if (options.limit) query = collection.limit(options.limit)
+  if (options.limit) query = query.limit(options.limit)
 
   return (await query.get()).docs.map(d => d.data())
 }

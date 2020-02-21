@@ -1,13 +1,9 @@
-// See https://github.com/dialogflow/dialogflow-fulfillment-nodejs
-// for Dialogflow fulfillment library docs, samples, and to report issues
-// hello world comment 2
-'use strict';
-
 const functions = require('firebase-functions');
+const {WebhookClient} = require('dialogflow-fulfillment');
+
 const {cartDisplay} = require('./intent_handlers/cart/cartDisplay')
 const {choomantar} = require('./intent_handlers/productDiscovery/choomantar')
-const {WebhookClient} = require('dialogflow-fulfillment');
-// const {Card, Suggestion} = require('dialogflow-fulfillment');
+const {listOrders} = require('./intent_handlers/orders/listOrder')
 
 const { order, _orderTests } = require('./intent_handlers/productDiscovery/order');
 
@@ -46,6 +42,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   intentMap.set('cart.display', cartDisplay);
   intentMap.set('choomantar', choomantar);
   //intentMap.set('cart.display - yes', confirmOrder);
+  intentMap.set('Orders.list', listOrders)
 
   // intentMap.set('your intent name here', yourFunctionHandler);
   // intentMap.set('your intent name here', googleAssistantHandler);
