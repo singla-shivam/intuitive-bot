@@ -2,11 +2,12 @@ const functions = require('firebase-functions');
 const {WebhookClient} = require('dialogflow-fulfillment');
 
 const {cartDisplay} = require('./intent_handlers/cart/cartDisplay')
+const {cartChangeQty, cartReceiveExtraTags, cartRemoveItem, cartConfirmQty} = require("./intent_handlers/cart/changeQty");
 const {choomantar} = require('./intent_handlers/productDiscovery/choomantar')
+
 const {listOrders} = require('./intent_handlers/orders/listOrder')
 
 const { order, _orderTests } = require('./intent_handlers/productDiscovery/order');
-
 
 const {updateTag} = require('./entities/tag')
 // const {addProduct, findProductsByTags} = require('./database/product')
@@ -40,6 +41,10 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   //NTC PART END
   //intentMap.set('order.product', addItemsToCart);
   intentMap.set('cart.display', cartDisplay);
+  intentMap.set('cart.changeQty', cartChangeQty);
+  intentMap.set('cart.get_extra_tags', cartReceiveExtraTags);
+  intentMap.set('cart.confirmQty', cartConfirmQty);
+  intentMap.set('cart.remove-item', cartRemoveItem);
   intentMap.set('choomantar', choomantar);
   //intentMap.set('cart.display - yes', confirmOrder);
   intentMap.set('Orders.list', listOrders)
