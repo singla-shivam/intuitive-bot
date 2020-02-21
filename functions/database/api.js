@@ -5,6 +5,7 @@ const {firestore} = require('firebase-admin')
  * @template T
  * @property {string} path
  * @property {T} value
+ * @property {string} [timestamp] - add timestamp when the document is created
  * @property {boolean} [merge] - Changes the behavior of a set() call to only replace the values specified in its data argument.
  * Fields omitted from the set() call remain untouched.
  * @property {boolean} [update] - To update the data. Less priority than delete
@@ -27,6 +28,8 @@ const {firestore} = require('firebase-admin')
  * @property {number} [limit]
  * @property {AndQuery[]} [andQueries]
  * @property {{field: string, direction: OrderByDirection}} [orderBy]
+ * @property [startAt]
+ * @property [startAfter]
  */
 
 /**
@@ -52,13 +55,15 @@ exports.addData = async function (options, addId = true) {
     if (paths.length % 2 === 0) d = document
     else d = collection.doc()
 
-    if (addId === true && options.value && !options.value.id) options.value.id = d.id
-    else if (addId && typeof addId === "string" && options.value && !options.value.id) options.value[addId] = d.id
+    if (addId) _addId(options, d.id, addId)
     if (options.delete) await d.delete()
     else if (options.update) await d.update(options.value)
-    else await d.set(options.value, {
+    else {
+      if (options.timestamp) options.value[options.timestamp] = firestore.FieldValue.serverTimestamp()
+      await d.set(options.value, {
         merge: options.merge || false
       })
+    }
 
     return options.value
   } catch (e) {
@@ -90,12 +95,10 @@ exports.getData = async function (options) {
   /** @type FirebaseFirestore.Query */
   let query = collection
   if (options.andQueries && options.andQueries.length !== 0) query = queriedCollection(collection, options.andQueries)
-  if (options.orderBy) {
-    options.orderBy.direction
-      ? query = query.orderBy(options.orderBy.field, options.orderBy.direction)
-      : query = query.orderBy(options.orderBy.field)
-  }
 
+  if (options.orderBy) query = _orderByQuery(query, options.orderBy)
+  if (options.startAt) query = _startArQuery(query, options.startAt)
+  if (options.startAfter) query = _startAfterQuery(query, options.startAfter)
   if (options.limit) query = query.limit(options.limit)
 
   return (await query.get()).docs.map(d => d.data())
@@ -128,3 +131,49 @@ function queriedCollection(collection, andQueries) {
   andQueries.forEach(q => collection = collection.where(q[0], q[1], q[2]))
   return collection
 }
+
+/**
+ * Helper function to set id
+ * @helper
+ * @param options {OptionsAddData}
+ * @param {string} docId
+ * @param {string} [idString] - Custom id. if provided `options.value[id] = document.id` else `options.value.id = document.id`
+ * @return {void}
+ */
+function _addId(options, docId, idString) {
+  if (!options.value || options.value.id) return
+  if (idString !== true) options.value[idString] = docId
+  else options.value.id = docId
+}
+
+/**
+ * @param {FirebaseFirestore.Query} query
+ * @param {{field: string, direction: OrderByDirection}} orderBy
+ * @return {FirebaseFirestore.Query}
+ * @private
+ */
+function _orderByQuery(query, orderBy) {
+  if (orderBy.direction) return query.orderBy(orderBy.field, orderBy.direction)
+  else return query.orderBy(orderBy.field)
+}
+
+/**
+ * @param {FirebaseFirestore.Query} query
+ * @param value
+ * @return {FirebaseFirestore.Query}
+ * @private
+ */
+function _startArQuery(query, value) {
+  return query.startAt(value)
+}
+
+/**
+ * @param {FirebaseFirestore.Query} query
+ * @param value
+ * @return {FirebaseFirestore.Query}
+ * @private
+ */
+function _startAfterQuery(query, value) {
+  return query.startAfter(value)
+}
+

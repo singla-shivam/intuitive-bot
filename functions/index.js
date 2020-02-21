@@ -3,9 +3,9 @@ const {WebhookClient} = require('dialogflow-fulfillment');
 
 const {cartDisplay} = require('./intent_handlers/cart/cartDisplay')
 const {cartChangeQty, cartReceiveExtraTags, cartRemoveItem, cartConfirmQty} = require("./intent_handlers/cart/changeQty");
-const {choomantar} = require('./intent_handlers/productDiscovery/choomantar')
+const {choomantar, choomantar2} = require('./intent_handlers/productDiscovery/choomantar')
 
-const {listOrders} = require('./intent_handlers/orders/listOrder')
+const {listRecentOrders, listNextRecentOrders} = require('./intent_handlers/orders/listOrder')
 
 const { order, _orderTests } = require('./intent_handlers/productDiscovery/order');
 
@@ -47,7 +47,9 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   intentMap.set('cart.remove-item', cartRemoveItem);
   intentMap.set('choomantar', choomantar);
   //intentMap.set('cart.display - yes', confirmOrder);
-  intentMap.set('Orders.list', listOrders)
+  intentMap.set('Orders.recent', listRecentOrders)
+  intentMap.set('Orders.recent.showMore', listRecentOrders)
+  intentMap.set('choomantar2', choomantar2);
 
   // intentMap.set('your intent name here', yourFunctionHandler);
   // intentMap.set('your intent name here', googleAssistantHandler);

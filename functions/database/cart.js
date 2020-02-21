@@ -1,4 +1,5 @@
 const {getData, addData} = require('./api')
+const {getSessionId} = require('./../utils')
 
 const CART_ROOT_COLLECTION = "sessions"
 
@@ -11,7 +12,7 @@ const CART_ROOT_COLLECTION = "sessions"
 exports.setCart = async function (agent, cart) {
   let promises = cart.map(product =>
     addData({
-        path: `${CART_ROOT_COLLECTION}/${_getSessionId(agent)}/cart/${product.product_id}`,
+        path: `${CART_ROOT_COLLECTION}/${getSessionId(agent)}/cart/${product.product_id}`,
         value: product
       },
       false
@@ -27,7 +28,7 @@ exports.setCart = async function (agent, cart) {
  * @return {Promise<T>}
  */
 exports.removeCartItem = async function (agent, productId) {
-  return await _removeCartItem(_getSessionId(agent), productId)
+  return await _removeCartItem(getSessionId(agent), productId)
 }
 
 /**
@@ -38,10 +39,10 @@ exports.removeCartItem = async function (agent, productId) {
 exports.clearCart = async function (agent) {
   // retrieve all the products present in the cart
   const products = await getData({
-    path: `${CART_ROOT_COLLECTION}/${_getSessionId(agent)}/cart`
+    path: `${CART_ROOT_COLLECTION}/${getSessionId(agent)}/cart`
   })
   // remove products from the cart one by one
-  let promises = products.map(productId => _removeCartItem(_getSessionId(agent), productId))
+  let promises = products.map(productId => _removeCartItem(getSessionId(agent), productId))
   return await Promise.all(promises)
 }
 
@@ -54,7 +55,7 @@ exports.clearCart = async function (agent) {
  */
 exports.setCartItem = async function (agent, productId, quantity) {
   return await addData({
-      path: `${CART_ROOT_COLLECTION}/${_getSessionId(agent)}/cart/${productId}`,
+      path: `${CART_ROOT_COLLECTION}/${getSessionId(agent)}/cart/${productId}`,
       value: {
         quantity
       }
@@ -78,17 +79,6 @@ function _removeCartItem(sessionId, productId) {
 }
 
 /**
- * Retrieves session id from the agent
- * @param {WebhookClient} agent
- * @returns {string} - returns session Id
- * @private
- */
-function _getSessionId(agent) {
-  const session = agent.request_.body.session
-  return session.slice(session.lastIndexOf('/') + 1)
-}
-
-/**
  *
  * @param {WebhookClient} agent
  * @return {Promise<{product_id: string, quantity: number}[]>}
@@ -96,7 +86,7 @@ function _getSessionId(agent) {
 exports.getCart = async function (agent) {
   return (
     await getData({
-      path: `sessions/${_getSessionId(agent)}/cart`
+      path: `sessions/${getSessionId(agent)}/cart`
     })
   )
 }
