@@ -4,14 +4,12 @@
 'use strict';
 
 const functions = require('firebase-functions');
-const {cartDisplay} = require('./intent_handlers/cart/cartDisplay')
-const {choomantar} = require('./intent_handlers/productDiscovery/choomantar')
 const {WebhookClient} = require('dialogflow-fulfillment');
-// const {Card, Suggestion} = require('dialogflow-fulfillment');
-
-const { order, _orderTests } = require('./intent_handlers/productDiscovery/order');
-
-
+const {Card, Suggestion} = require('dialogflow-fulfillment');
+const {cartDisplay} = require('./intent_handlers/cart/cartDisplay')
+const {cartChangeQty, cartReceiveExtraTags, cartRemoveItem} = require("./intent_handlers/cart/changeQty");
+const {choomantar} = require('./intent_handlers/productDiscovery/choomantar')
+const {order, _orderTests} = require('./intent_handlers/productDiscovery/order');
 const {updateTag} = require('./entities/tag')
 // const {addProduct, findProductsByTags} = require('./database/product')
 // const {getData} = require('./database/api')

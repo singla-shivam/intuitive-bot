@@ -2,10 +2,11 @@ const {findProductsByTags, getProducts} = require("../../database/product");
 const {getCart, setCartItem, removeCartItem} = require("../../database/cart");
 
 exports.cartReceiveExtraTags = async function (agent) {
-  console.log("cartRecieveExtraTags Invoked");
+
   let tags = agent.parameters.tags || [] // Tags from previous request
   let extra_tags = agent.parameters.newTags || [] // Additional tags provided
   let qty = agent.parameters.quantity // Pass on quantity from context
+  console.log("cartRecieveExtraTags Invoked", tags, extra_tags, qty);
   await _modifyItemQty(agent, [...tags, ...extra_tags], qty)
 }
 
@@ -37,6 +38,7 @@ async function _modifyItemQty(agent, tags, quantity) {
 }
 
 async function _deleteItem(agent, products) {
+  console.log("_deleteItem", products[0].product_id)
   await removeCartItem(agent, products[0].product_id)
   agent.add(`I have removed ${products[0].name} from your cart. Anything else?`)
 }
