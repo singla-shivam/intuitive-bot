@@ -5,7 +5,7 @@
 
 const functions = require('firebase-functions');
 const {cartDisplay} = require('./intent_handlers/cart/cartDisplay')
-const {cartChangeQty} = require("./intent_handlers/cart/changeQty");
+const {cartChangeQty, cartReceiveExtraTags, cartRemoveItem} = require("./intent_handlers/cart/changeQty");
 const {choomantar} = require('./intent_handlers/productDiscovery/choomantar')
 const { order } = require('./intent_handlers/productDiscovery/order');
 const { WebhookClient } = require('dialogflow-fulfillment');
@@ -43,6 +43,8 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   //intentMap.set('order.product', addItemsToCart);
   intentMap.set('cart.display', cartDisplay);
   intentMap.set('cart.changeQty', cartChangeQty);
+  intentMap.set('cart.get_extra_tags', cartReceiveExtraTags);
+  intentMap.set('cart.remove-item', cartRemoveItem);
   intentMap.set('choomantar', choomantar);
   //intentMap.set('cart.display - yes', confirmOrder);
 
