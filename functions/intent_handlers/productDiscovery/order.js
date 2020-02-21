@@ -15,13 +15,28 @@ exports.order = async function (agent) {
   // _orderTests();
   console.log('INSIDE ORDER')
   let { tag, number } = agent.parameters;
-  number = number == undefined ? 1 : number;
+  number = number == '' ? 1 : number;
   console.log(tag, number)
   const products = await findProductsByTags(tag);
   console.log(products)
   let response = await _orderResponse(products, tag, number);
   console.log(response)
   agent.add(response);
+}
+
+exports.order_confirm = async function (agent) {
+  console.log('order confirm step ', agent)
+  let { tag, number } = agent.queryResult.outputContexts;
+  console.log(tag, number)
+  const products = await findProductsByTags(tag);
+  console.log(products)
+  if (products.length === 1) {
+    agent.add(` Thank You for your order of ${products[0].name} [ ${number} units] `)
+    // Place order
+  }
+  else {
+    agent.add(' How may I help you with' + tag.toString());
+  }
 }
 
 /**
@@ -41,19 +56,19 @@ async function _orderTests() {
  * @returns {String} response for agent
  */
 
-async function _orderResponse(products, tag, number ){
+async function _orderResponse(products, tag, number) {
   let response = "Sorry, can you be more specific";
   if (products.length == 0) {
     if (tag.length === 0) {
       response = "Sorry, what would you like to order?"
     }
     else {
-      response = "Sorry, your product is not available"
+      response = "Sorry, your product is not available " + tag.toString();
     }
   }
   else if (products.length === 1) {
     const { brand, name, price } = products[0]
-    response = "Thank You for the order of " + name;
+    response = "Your order of " + name + `[ ${number} units ]. Are you sure about it?`;
     for (var iter = 0; iter < number; iter++) {
       console.log(`${brand}, ${name}, ${price}, ${tag} ADDED`)
       // addProduct(brand, name, price, tag);
