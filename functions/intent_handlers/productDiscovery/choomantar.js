@@ -5,6 +5,6 @@ const {setCartItem} = require("../../database/cart");
  */
 exports.choomantar = async function (agent){
   console.log("choomantar Invoked");
-  await setCartItem(agent, 'qZFFAVPfMChskcRwxpQZ', 3)
-  agent.add("Amul milk 3 packets are now in your cart")
+  await setCartItem(agent, 'pLOhXIlTI78WjMLAlShX', 4)
+  agent.add("Four kitkat are now in your cart")
 }
