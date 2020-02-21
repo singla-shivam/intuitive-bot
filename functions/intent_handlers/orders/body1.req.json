@@ -1,0 +1,27 @@
+{
+  "responseId": "0f143448-c66e-4085-ae2b-1d455efa4cb3-7f245a81",
+  "queryResult": {
+    "queryText": "get recent orderes",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            ""
+          ]
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/intuitivebot/agent/intents/41664582-85ba-461e-ad4c-9701e75b40f7",
+      "displayName": "Orders.recent"
+    },
+    "intentDetectionConfidence": 0.5977204,
+    "languageCode": "en"
+  },
+  "originalDetectIntentRequest": {
+    "payload": {}
+  },
+  "session": "projects/intuitivebot/agent/sessions/3c91595d-99ca-2b90-59ef-31a2a2d00c34"
+}

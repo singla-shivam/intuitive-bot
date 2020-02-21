@@ -62,10 +62,11 @@ exports.addProduct = async function (brand, name, price, tags) {
  * @returns {Promise<Product[]>}
  */
 exports.findProductsByTags = async function (tags, productIds) {
+  if(tags.length === 0 || (productIds && productIds.length === 0)) return []
   /** @type AndQuery[]*/
   const andQueries = tags.map(tag => [`tags.${tag}`, "==", true])
 
-  if (productIds && productIds.length > 0) {
+  if (productIds) {
     // get and queries correspond to productIds
     /** @type AndQuery[][]*/
     const productsAndQueries = productIds.map(id => [...andQueries, ["product_id", "==", id]])
