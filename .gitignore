@@ -67,3 +67,7 @@ node_modules/
 # singla-shivam
 service-private-key.json
 setPrivateKey.sh
+
+#web app
+web-app/node_modules
+web-app/dist

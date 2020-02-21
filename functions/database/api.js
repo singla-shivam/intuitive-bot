@@ -51,8 +51,8 @@ exports.addData = async function (options, addId = true) {
     if (paths.length % 2 === 0) d = document
     else d = collection.doc()
 
-    if (addId === true && !options.value.id) options.value.id = d.id
-    else if (addId && typeof addId === "string" && !options.value.id) options.value[addId] = d.id
+    if (addId === true && options.value && !options.value.id) options.value.id = d.id
+    else if (addId && typeof addId === "string" && options.value && !options.value.id) options.value[addId] = d.id
     if (options.delete) await d.delete()
     else if (options.update) await d.update(options.value)
     else await d.set(options.value, {
