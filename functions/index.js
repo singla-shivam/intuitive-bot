@@ -5,7 +5,7 @@ const {cartDisplay} = require('./intent_handlers/cart/cartDisplay')
 const {cartChangeQty, cartReceiveExtraTags, cartRemoveItem, cartConfirmQty} = require("./intent_handlers/cart/changeQty");
 const {choomantar, choomantar2} = require('./intent_handlers/productDiscovery/choomantar')
 
-const {listRecentOrders, listNextRecentOrders} = require('./intent_handlers/orders/listOrder')
+const {listRecentOrders, findOrders} = require('./intent_handlers/orders/listOrder')
 
 const { order, _orderTests } = require('./intent_handlers/productDiscovery/order');
 
@@ -49,6 +49,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   //intentMap.set('cart.display - yes', confirmOrder);
   intentMap.set('Orders.recent', listRecentOrders)
   intentMap.set('Orders.recent.showMore', listRecentOrders)
+  intentMap.set('Orders.find', findOrders)
   intentMap.set('choomantar2', choomantar2);
 
   // intentMap.set('your intent name here', yourFunctionHandler);
