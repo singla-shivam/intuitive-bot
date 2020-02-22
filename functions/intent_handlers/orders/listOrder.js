@@ -42,6 +42,7 @@ async function findOrders(agent) {
  * @param {string} defaultMessage
  */
 function _listOrders(agent, orders, defaultMessage = "No more orders") {
+  console.log("_listOrders", orders)
   if (orders.length === 0) agent.add(defaultMessage)
   else {
     orders.forEach(order => {

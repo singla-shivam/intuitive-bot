@@ -36,7 +36,7 @@ async function getRecentOrders(agent, last = undefined, next = true) {
       direction: "desc",
       field: "ordered"
     },
-    limit: 2,
+    limit: 3,
   }
   if (last) options.startAfter = last
   return await getData(options)
@@ -50,7 +50,7 @@ async function getRecentOrders(agent, last = undefined, next = true) {
  */
 async function addOrders(agent, order) {
   order.sessionId = getSessionId(agent)
-  order.ordered = Date.now()
+  order.ordered = Date.now() + 330 * 60 * 1000
   await addData({
     path: "orders",
     value: order,
@@ -63,7 +63,7 @@ async function addOrders(agent, order) {
  * @param {string} [endDateString]
  * @return {Promise<Order[]>}
  */
-async function getOrdersByDate(agent, dateString, endDateString= undefined) {
+async function getOrdersByDate(agent, dateString, endDateString = undefined) {
   const sessionId = getSessionId(agent)
   const dateMillis = new Date(dateString).getTime()
   const startTime = endDateString ? dateMillis : dateMillis - 12 * 60 * 60 * 1000
@@ -85,9 +85,14 @@ async function _getOrdersByDate(sessionId, startTime, endTime) {
     path: "orders",
     andQueries: [
       ["sessionId", "==", sessionId],
-      ["ordered", ">=" , startTime],
-      ["ordered", "<" , endTime]
-    ]
+      ["ordered", ">=", startTime],
+      ["ordered", "<", endTime]
+    ],
+    orderBy: {
+      direction: "desc",
+      field: "ordered"
+    },
+    limit: 3
   })
 }
 

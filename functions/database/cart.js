@@ -35,14 +35,17 @@ exports.removeCartItem = async function (agent, productId) {
  * Clears the cart associated with [sessionId]
  * @param {WebhookClient} agent
  * @return {T[]}
+ * @calledBy -
+ * * @link #placeOrder
  */
 exports.clearCart = async function (agent) {
   // retrieve all the products present in the cart
   const products = await getData({
     path: `${CART_ROOT_COLLECTION}/${getSessionId(agent)}/cart`
   })
+  console.log("ClearCart", JSON.stringify(products))
   // remove products from the cart one by one
-  let promises = products.map(productId => _removeCartItem(getSessionId(agent), productId))
+  let promises = products.map(({product_id}) => _removeCartItem(getSessionId(agent), product_id))
   return await Promise.all(promises)
 }
 

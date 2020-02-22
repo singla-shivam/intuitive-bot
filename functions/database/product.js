@@ -4,6 +4,7 @@ const {getData, addData} = require('./api')
  * @typedef Product
  * @type object
  * @property {string} product_id
+ * @property {number} price
  */
 
 /**
@@ -62,7 +63,7 @@ exports.addProduct = async function (brand, name, price, tags) {
  * @returns {Promise<Product[]>}
  */
 exports.findProductsByTags = async function (tags, productIds) {
-  if(tags.length === 0 || (productIds && productIds.length === 0)) return []
+  if (tags.length === 0 || (productIds && productIds.length === 0)) return []
   /** @type AndQuery[]*/
   const andQueries = tags.map(tag => [`tags.${tag}`, "==", true])
 
