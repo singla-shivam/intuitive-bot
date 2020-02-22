@@ -1,30 +1,15 @@
-const {cartChangeQty} = require("./cart/changeQty")
-const {getProducts} = require("../database/product")
-
-/**
- * This method is invoked when additional tags are requested
- */
-exports.extraTagsReceiver = async function (agent) {
-  agent.parameters.tags = [...tags, ...(agent.parameters.newTags || [])]
-  // Merges old tags with new tags
-  console.log("extraTagsReceiver Invoked", agent.parameters);
-  if (agent.parameters.action === "cart") {
-    await cartChangeQty(agent)
-  } else if (agent.parameters.action === "discovery") {
-    // TODO Fill this
-  }
-}
+const {getProducts} = require("../../database/product")
 
 /**
  * Helper method that requests user for more clarity on the product they intended in the request
- * @return true if we have figured out a single product that user meant to say, false otherwise
  * @param {WebhookClient} agent
  * @param {Product[]} products
  * @param params will be {
  *   tags,
  *   quantity,
- *   action: 'cart' or 'discovery' (depending on who invoked this method, {extraTagsReceiver} will take action)
+ *   action: 'cart' or 'discovery' (depending on who invoked this method, {extraTagsReceiver.js} will take action)
  * }
+ * @return true if we have figured out a single product that user meant to say, false otherwise
  */
 async function clarifyWhichProduct(agent, products, params) {
   if (products.length === 1) {

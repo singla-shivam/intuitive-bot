@@ -1,4 +1,4 @@
-const {clarifyWhichProduct} = require('../clarifyProduct')
+const {clarifyWhichProduct} = require('../genericMethods/clarifyProduct')
 const {findProductsByTags} = require("../../database/product")
 const {getCart, setCartItem, removeCartItem} = require("../../database/cart")
 

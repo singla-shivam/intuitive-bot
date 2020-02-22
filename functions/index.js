@@ -9,7 +9,7 @@ const {getOrderStatus} = require('./intent_handlers/orders/statusOrder')
 
 const {Card, Suggestion} = require('dialogflow-fulfillment');
 const {cartDisplay} = require('./intent_handlers/cart/cartDisplay')
-const {extraTagsReceiver} = require('./intent_handlers/clarifyProduct')
+const {extraTagsReceiver} = require('./intent_handlers/genericMethods/extraTagsReceiver')
 const {cartChangeQty, cartRemoveItem, cartConfirmQty} = require("./intent_handlers/cart/changeQty");
 const {order, _orderTests, order_confirm} = require('./intent_handlers/productDiscovery/order');
 const {categories} = require('./intent_handlers/productDiscovery/category')
