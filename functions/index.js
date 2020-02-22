@@ -9,7 +9,8 @@ const {getOrderStatus} = require('./intent_handlers/orders/statusOrder')
 
 const {Card, Suggestion} = require('dialogflow-fulfillment');
 const {cartDisplay} = require('./intent_handlers/cart/cartDisplay')
-const {cartChangeQty, cartReceiveExtraTags, cartRemoveItem, cartConfirmQty} = require("./intent_handlers/cart/changeQty");
+const {extraTagsReceiver} = require('./intent_handlers/clarifyProduct')
+const {cartChangeQty, cartRemoveItem, cartConfirmQty} = require("./intent_handlers/cart/changeQty");
 const {order, _orderTests, order_confirm} = require('./intent_handlers/productDiscovery/order');
 const {categories} = require('./intent_handlers/productDiscovery/category')
 const {updateTag} = require('./entities/tag')
@@ -47,7 +48,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   //intentMap.set('order.product', addItemsToCart);
   intentMap.set('cart.display', cartDisplay);
   intentMap.set('cart.changeQty', cartChangeQty);
-  intentMap.set('cart.get_extra_tags', cartReceiveExtraTags);
+  intentMap.set('receive_extra_tags', extraTagsReceiver);
   intentMap.set('cart.confirmQty', cartConfirmQty);
   intentMap.set('cart.remove-item', cartRemoveItem);
   intentMap.set('choomantar', choomantar);
