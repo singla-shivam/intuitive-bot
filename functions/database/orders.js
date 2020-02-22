@@ -73,6 +73,18 @@ async function getOrdersByDate(agent, dateString, endDateString = undefined) {
 }
 
 /**
+ * @param {WebhookClient} agent
+ * @return {Promise<Order[]>}
+ */
+async function getLastOrder(agent) {
+  const sessionId = getSessionId(agent)
+  const andQueries = [
+    ["sessionId", "==", sessionId],
+  ]
+  return await _createGetOrderQuery(andQueries, 1)
+}
+
+/**
  *
  * @param {string} sessionId
  * @param {number} startTime
@@ -81,19 +93,31 @@ async function getOrdersByDate(agent, dateString, endDateString = undefined) {
  * @private
  */
 async function _getOrdersByDate(sessionId, startTime, endTime) {
+  const andQueries = [
+    ["sessionId", "==", sessionId],
+    ["ordered", ">=", startTime],
+    ["ordered", "<", endTime]
+  ]
+  return _createGetOrderQuery(andQueries)
+}
+
+/**
+ *
+ * @param {AndQuery[]} andQueries
+ * @param {number} [limit=3]
+ * @return {Promise<Order[]>}
+ * @private
+ */
+async function _createGetOrderQuery(andQueries, limit = 3) {
   return getData({
     path: "orders",
-    andQueries: [
-      ["sessionId", "==", sessionId],
-      ["ordered", ">=", startTime],
-      ["ordered", "<", endTime]
-    ],
     orderBy: {
       direction: "desc",
       field: "ordered"
     },
-    limit: 3
+    andQueries,
+    limit
   })
 }
 
-module.exports = {getRecentOrders, addOrders, getOrdersByDate}
+module.exports = {getRecentOrders, addOrders, getOrdersByDate, getLastOrder}

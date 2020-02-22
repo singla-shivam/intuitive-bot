@@ -5,6 +5,7 @@ const {choomantar, choomantar2} = require('./intent_handlers/productDiscovery/ch
 
 const {listRecentOrders, findOrders} = require('./intent_handlers/orders/listOrder')
 const {placeOrder} = require('./intent_handlers/orders/placeOrder')
+const {getOrderStatus} = require('./intent_handlers/orders/statusOrder')
 
 const {Card, Suggestion} = require('dialogflow-fulfillment');
 const {cartDisplay} = require('./intent_handlers/cart/cartDisplay')
@@ -55,6 +56,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   intentMap.set('Orders.recent.showMore', listRecentOrders)
   intentMap.set('Orders.find', findOrders)
   intentMap.set('Orders.place', placeOrder)
+  intentMap.set('Orders.status', getOrderStatus)
   intentMap.set('choomantar2', choomantar2);
 
   // intentMap.set('your intent name here', yourFunctionHandler);
