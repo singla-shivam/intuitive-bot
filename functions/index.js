@@ -4,13 +4,14 @@
 'use strict';
 
 const functions = require('firebase-functions');
-const {WebhookClient} = require('dialogflow-fulfillment');
-const {Card, Suggestion} = require('dialogflow-fulfillment');
-const {cartDisplay} = require('./intent_handlers/cart/cartDisplay')
-const {cartChangeQty, cartReceiveExtraTags, cartRemoveItem, cartConfirmQty} = require("./intent_handlers/cart/changeQty");
-const {choomantar} = require('./intent_handlers/productDiscovery/choomantar')
-const {order, _orderTests} = require('./intent_handlers/productDiscovery/order');
-const {updateTag} = require('./entities/tag')
+const { WebhookClient } = require('dialogflow-fulfillment');
+const { Card, Suggestion } = require('dialogflow-fulfillment');
+const { cartDisplay } = require('./intent_handlers/cart/cartDisplay')
+const { cartChangeQty, cartReceiveExtraTags, cartRemoveItem, cartConfirmQty } = require("./intent_handlers/cart/changeQty");
+const { choomantar } = require('./intent_handlers/productDiscovery/choomantar')
+const { order, _orderTests, order_confirm } = require('./intent_handlers/productDiscovery/order');
+const { categories } = require('./intent_handlers/productDiscovery/category')
+const { updateTag } = require('./entities/tag')
 // const {addProduct, findProductsByTags} = require('./database/product')
 // const {getData} = require('./database/api')
 
@@ -39,6 +40,8 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   intentMap.set('Default Fallback Intent', fallback);
   //NTC PART Begin
   intentMap.set('Order', order);
+  intentMap.set('Category_order - in_category', categories)
+  intentMap.set('Order - yes', order_confirm)
   //NTC PART END
   //intentMap.set('order.product', addItemsToCart);
   intentMap.set('cart.display', cartDisplay);
