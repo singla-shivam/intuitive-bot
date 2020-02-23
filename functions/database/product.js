@@ -24,6 +24,16 @@ exports.getProducts = async function (products) {
 }
 
 /**
+ * Function to get categories that cover all the products
+ * @param {String[]} products: Is set from which categories is to be picked, if absent all products
+ * @return {Promise<string[]>}
+ * @author satyamcse
+ */
+exports.getProductCategories = async function (products) {
+  return [`TV`, `AC`, `Refrigerator`]
+}
+
+/**
  *
  * @param {string} brand
  * @param {string} name

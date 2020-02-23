@@ -7,12 +7,12 @@ const {listRecentOrders, findOrders} = require('./intent_handlers/orders/listOrd
 const {placeOrder} = require('./intent_handlers/orders/placeOrder')
 const {getOrderStatus} = require('./intent_handlers/orders/statusOrder')
 
+const {findProduct, confirmCartAdd} = require("./intent_handlers/productDiscovery/findProduct")
+
 const {Card, Suggestion} = require('dialogflow-fulfillment');
 const {cartDisplay} = require('./intent_handlers/cart/cartDisplay')
 const {extraTagsReceiver} = require('./intent_handlers/genericMethods/extraTagsReceiver')
 const {cartChangeQty, cartRemoveItem, cartConfirmQty} = require("./intent_handlers/cart/changeQty");
-const {order, _orderTests, order_confirm} = require('./intent_handlers/productDiscovery/order');
-const {categories} = require('./intent_handlers/productDiscovery/category')
 const {updateTag} = require('./entities/tag')
 // const {addProduct, findProductsByTags} = require('./database/product')
 // const {getData} = require('./database/api')
@@ -40,12 +40,10 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   let intentMap = new Map();
   intentMap.set('Default Welcome Intent', welcome);
   intentMap.set('Default Fallback Intent', fallback);
-  //NTC PART Begin
-  intentMap.set('Order', order);
-  intentMap.set('Category_order - in_category', categories)
-  intentMap.set('Order - yes', order_confirm)
-  //NTC PART END
-  //intentMap.set('order.product', addItemsToCart);
+  // Product discover related methods
+  intentMap.set('discover.find_product', findProduct);
+  intentMap.set('discover.confirm_add_cart', confirmCartAdd);
+  // Cart related methods
   intentMap.set('cart.display', cartDisplay);
   intentMap.set('cart.changeQty', cartChangeQty);
   intentMap.set('receive_extra_tags', extraTagsReceiver);

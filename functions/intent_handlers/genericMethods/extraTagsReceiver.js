@@ -1,3 +1,4 @@
+const {findProduct} = require("../productDiscovery/findProduct")
 const {cartChangeQty} = require("../cart/changeQty")
 
 /**
@@ -10,6 +11,6 @@ exports.extraTagsReceiver = async function (agent) {
   if (agent.parameters.action === "cart") {
     await cartChangeQty(agent)
   } else if (agent.parameters.action === "discovery") {
-    // TODO Fill this
+    await findProduct(agent)
   }
 }
