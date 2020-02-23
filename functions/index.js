@@ -12,7 +12,7 @@ const {findProduct, confirmCartAdd} = require("./intent_handlers/productDiscover
 const {Card, Suggestion} = require('dialogflow-fulfillment');
 const {cartDisplay} = require('./intent_handlers/cart/cartDisplay')
 const {extraTagsReceiver} = require('./intent_handlers/genericMethods/extraTagsReceiver')
-const {cartChangeQty, cartRemoveItem, cartConfirmQty} = require("./intent_handlers/cart/changeQty");
+const {cartChangeQty, cartRemoveItem, cartConfirmQty, clearCart} = require("./intent_handlers/cart/changeQty");
 const {updateTag} = require('./entities/tag')
 // const {addProduct, findProductsByTags} = require('./database/product')
 // const {getData} = require('./database/api')
@@ -42,10 +42,14 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   intentMap.set('Default Fallback Intent', fallback);
   // Product discover related methods
   intentMap.set('discover.find_product', findProduct);
+  intentMap.set('price.check', findProduct); // Merged to reduce complexity
+  // Duplicate intentions, similar logic req. for handling requests
   intentMap.set('discover.confirm_add_cart', confirmCartAdd);
+  intentMap.set('discover.confirm_add_cart_with_qty', confirmCartAdd);
   // Cart related methods
   intentMap.set('cart.display', cartDisplay);
   intentMap.set('cart.changeQty', cartChangeQty);
+  intentMap.set('cart.clear', clearCart);
   intentMap.set('receive_extra_tags', extraTagsReceiver);
   intentMap.set('cart.confirmQty', cartConfirmQty);
   intentMap.set('cart.remove-item', cartRemoveItem);

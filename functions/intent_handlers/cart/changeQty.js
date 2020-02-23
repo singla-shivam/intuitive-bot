@@ -1,3 +1,4 @@
+const {clearCart} = require("../../database/cart")
 const {clarifyWhichProduct} = require('../genericMethods/clarifyProduct')
 const {findProductsByTags} = require("../../database/product")
 const {getCart, setCartItem, removeCartItem} = require("../../database/cart")
@@ -20,6 +21,14 @@ exports.cartChangeQty = async function (agent) {
   let tags = agent.parameters.tags
   let quantity = agent.parameters.quantity
   await _modifyItemQty(agent, tags, quantity)
+}
+
+/**
+ * This method is invoked when user makes a request to clear the cart
+ */
+exports.clearCart = async function (agent) {
+  await clearCart(agent)
+  agent.add(`Sure, I have cleared your cart. Want to add something fresh?`)
 }
 
 /**
