@@ -1,0 +1,81 @@
+- name: OnePlus 55 inch QLED TV
+  price: 69899
+  brand: OnePlus
+- name: Samsung 43 inch 4K UHD LED TV
+  price: 35999
+  brand: Samsung
+- name: Samsung 50 inch 4K UHD LED Smart TV
+  price: 46998
+  brand: Samsung
+- name: Mi 32 inch HD Ready LED TV
+  price: 12499
+  brand: Xiomi
+- name: Mi 50 inch 4K UHD LED Android TV
+  price: 29999
+  brand: Xiomi
+- name: LG 32 inch HD Ready LED Smart TV
+  price: 14999
+  brand: LG
+- name: LG 43 inch 4K UHD LED Smart TV
+  price: 35999
+  brand: LG
+
+- name: Whirlpool 190L 3 star Direct cool Single door Alpha Silver Steel Refrigerator
+  price: 10890
+  brand: Whirlpool
+- name: Whirlpool 190L 3 star Direct cool Single door Crimson Red Refrigerator
+  price: 10890
+  brand: Whirlpool
+- name: Whirlpool 240L Frost Free Multi door Silver Refrigerator
+  price: 23700
+  brand: Whirlpool
+- name: Whirlpool 240L Frost Free Multi door Blue Refrigerator
+  price: 23700
+  brand: Whirlpool
+- name: Whirlpool 190L 4 star Direct cool Single door Alpha Silver Steel Refrigerator
+  price: 13740
+  brand: Whirlpool
+- name: Haier 52L 3 star Direct cool Single door Brushline Silver Refrigerator
+  price: 6960
+  brand: Haier
+- name: Haier 320L 3 star Frost Free Double door Brushline Silver Refrigerator
+  price: 25900
+  brand: Haier
+- name: LG 270L 3 star Direct cool Single door Silver Shiny Steel Refrigerator
+  price: 19899
+  brand: LG
+- name: Godrej 200L 3 star Direct cool Single door Scarlet Red Refrigerator
+  price: 19899
+  brand: Godrej
+
+
+- name: Whirlpool 0.8 Ton 3 star Inverter Copper Split AC White
+  price: 22999
+  brand: Whirlpool
+- name: Whirlpool 1 Ton 3 star Inverter Copper Split AC White
+  price: 25999
+  brand: Whirlpool
+- name: Whirlpool 1.5 Ton 3 star Inverter Copper Split AC White
+  price: 28999
+  brand: Whirlpool
+- name: LG 1.5 Ton 5 star Dual Inverter Copper Split AC White
+  price: 38999
+  brand: LG
+- name: LG 1.5 Ton 3 star Dual Inverter Copper Split AC White
+  price: 35999
+  brand: LG
+- name: LG 1.5 Ton 5 star Wi-Fi Inverter Copper Window AC White
+  price: 33445
+  brand: LG
+- name: LG 1.5 Ton 3 star Inverter Copper Split AC Floral White
+  price: 44999
+  brand: LG
+- name: Daikin 0.8 Ton 3 star Copper Split AC White
+  price: 22490
+  brand: Daikin
+- name: Godrej 1 Ton 3 star Copper Split AC White
+  price: 25900
+  brand: Godrej
+- name: Voltas 1.2 Ton 3 star Copper Split AC White
+  price: 28999
+  brand: Voltas

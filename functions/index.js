@@ -7,12 +7,14 @@ const {listRecentOrders, findOrders} = require('./intent_handlers/orders/listOrd
 const {placeOrder} = require('./intent_handlers/orders/placeOrder')
 const {getOrderStatus} = require('./intent_handlers/orders/statusOrder')
 
+const {addData} = require('./data')
+
 const {Card, Suggestion} = require('dialogflow-fulfillment');
 const {cartDisplay} = require('./intent_handlers/cart/cartDisplay')
 const {cartChangeQty, cartReceiveExtraTags, cartRemoveItem, cartConfirmQty} = require("./intent_handlers/cart/changeQty");
 const {order, _orderTests, order_confirm} = require('./intent_handlers/productDiscovery/order');
 const {categories} = require('./intent_handlers/productDiscovery/category')
-const {updateTag} = require('./entities/tag')
+const {updateEntityOnProductAdd} = require('./entities/tag')
 // const {addProduct, findProductsByTags} = require('./database/product')
 // const {getData} = require('./database/api')
 
@@ -69,30 +71,22 @@ exports.entityUpdate = functions.firestore
   .onCreate(async (document, context) => {
     const productId = context.params["productId"]
     const data = document.data()
-
     console.log("created product", JSON.stringify(data))
-
-    return Promise.all([
-      updateTag(Object.keys(data.tags))
-    ])
+    return await updateEntityOnProductAdd(data)
   })
+
+exports.addData = functions.https.onRequest(async (req, res) => {
+  if (req.query["key"] === "JJypXlJ0tvLq5tbgx8TA") {
+    return await addData()
+  }
+})
 
 exports.test = functions.https.onRequest(async (req, res) => {
   if (req.query["key"] === "JJypXlJ0tvLq5tbgx8TA") {
-
-    // await addProduct("Dairy Milk", "Dairy Milk Silk Bubbly", 70, ["food", "chocolate"])
-    // await addProduct("Dairy Milk", "Dairy Milk Fivestar 15gm", 10, ["food", "chocolate"])
-    // await addProduct("KitKat", "KitKat 4pc", 20, ["food", "chocolate"])
-    // await addProduct("CocaCola", "CocaCola 600ml", 40, ["food", "beverage", "cold drink", "soft drink"])
-    // await addProduct("CocaCola", "CocaCola 1Litre", 60, ["food", "beverage", "cold drink", "soft drink"])
-    // await addProduct("CocaCola", "CocaCola 2Litre", 110, ["food", "beverage", "cold drink", "soft drink"])
-
-    // let result = await getData({
-    //   path: "products/2YR9z8moKlknDkXwomVk"
-    // })
-    // console.log("result", result)
-    // _orderTests();
-
-
+    await updateEntityOnProductAdd({
+      name: "OnePlus 55 inch QLED TV",
+      price: 69899,
+      brand: "OnePlus"
+    })
   }
 })
