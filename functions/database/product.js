@@ -4,7 +4,10 @@ const {getData, addData} = require('./api')
  * @typedef Product
  * @type object
  * @property {string} product_id
+ * @property {string} name
+ * @property {string} brand
  * @property {number} price
+ * @property {object} tags
  */
 
 /**
