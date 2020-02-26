@@ -6,8 +6,9 @@ const {addOrders} = require("../../database/orders");
  */
 exports.choomantar = async function (agent) {
   console.log("choomantar Invoked");
-  await setCartItem(agent, 'pLOhXIlTI78WjMLAlShX', 4)
-  agent.add("Four kitkat are now in your cart")
+  await setCartItem(agent, '0MgbR9BRPNK96zmf0pL2', 2)
+  await setCartItem(agent, '1pM6gsqoGYpJHWqJNHxd', 3)
+  agent.add("Cart added")
 }
 
 /**

@@ -1,81 +1,128 @@
 - name: OnePlus 55 inch QLED TV
   price: 69899
   brand: OnePlus
+  link: https://www.amazon.in/OnePlus-Certified-Android-55Q1IN-1-Without/dp/B07W5QZQ45/ref=sr_1_3?keywords=oneplus+led+tv&qid=1582646317&sr=8-3
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/71EO3uGdJbL._SX450_.jpg
 - name: Samsung 43 inch 4K UHD LED TV
   price: 35999
   brand: Samsung
+  link: https://www.amazon.in/Samsung-108cms-inches-Smart-43N5300/dp/B07F1PZLKJ/ref=sr_1_2_sspa?keywords=samsung+led+tv&qid=1582646244&sr=8-2-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUFCWUo1TjdBU1k3ODAmZW5jcnlwdGVkSWQ9QTA2NzUxMzUzT0xDNVRNUVBIRFRKJmVuY3J5cHRlZEFkSWQ9QTA1NDgzOTExSVNaVldSVVRGOE85JndpZGdldE5hbWU9c3BfYXRmJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ==
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/81gC9ykOiML._SX450_.jpg
 - name: Samsung 50 inch 4K UHD LED Smart TV
   price: 46998
   brand: Samsung
+  link: https://www.amazon.in/Samsung-Inches-Ultra-Smart-UA50NU7090KXXL/dp/B07RSYF1ZK/ref=sr_1_2_sspa?keywords=led+tv&qid=1582645921&sr=8-2-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEzRE5ORzBKV0pPSDFQJmVuY3J5cHRlZElkPUEwMTU5NTIzMko1UlM0MTZaVjdIUCZlbmNyeXB0ZWRBZElkPUEwNDYwNTczMVNPWk9DTDRNTTNFUCZ3aWRnZXROYW1lPXNwX2F0ZiZhY3Rpb249Y2xpY2tSZWRpcmVjdCZkb05vdExvZ0NsaWNrPXRydWU=
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/81FUCIyIoKL._SX355_.jpg
 - name: Mi 32 inch HD Ready LED TV
   price: 12499
   brand: Xiomi
+  link: https://www.amazon.in/Mi-LED-Ready-Android-Black/dp/B07HB7SSPZ/ref=sr_1_3?keywords=led+tv&qid=1582645921&sr=8-3
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/81kQE0OhMlL._SX450_.jpg
 - name: Mi 50 inch 4K UHD LED Android TV
   price: 29999
   brand: Xiomi
+  link: https://www.amazon.in/Mi-125-7-Inches-Ultra-Android/dp/B07X841RGL/ref=sr_1_4?keywords=mi+led+tv&qid=1582646331&sr=8-4
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/719LqtDQDWL._SX450_.jpg
 - name: LG 32 inch HD Ready LED Smart TV
   price: 14999
   brand: LG
+  link: https://www.amazon.in/LG-Inches-Ready-32LM560BPTC-Display/dp/B07TMFQMJC/ref=sr_1_3?keywords=lg+led+tv&qid=1582646411&sr=8-3
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/71%2BTheDgDgL._SX450_.jpg
 - name: LG 43 inch 4K UHD LED Smart TV
   price: 35999
   brand: LG
+  link: https://www.amazon.in/LG-inches-Smart-43UM7290PTF-Ceramic/dp/B07TMFV9NN/ref=sr_1_5?keywords=lg+led+tv&qid=1582646411&sr=8-5
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/912Mfy9s3GL._SX450_.jpg
 
 - name: Whirlpool 190L 3 star Direct cool Single door Alpha Silver Steel Refrigerator
   price: 10890
   brand: Whirlpool
+  link: https://www.amazon.in/Whirlpool-Refrigerator-WDE-205-CLS/dp/B071HFM8MF/ref=sr_1_2?crid=R2QS87VKPP39&keywords=whirlpool+refrigerator&qid=1582646435&sprefix=whir%2Caps%2C370&sr=8-2
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/71QQ8yuEMJL._SY679_.jpg
 - name: Whirlpool 190L 3 star Direct cool Single door Crimson Red Refrigerator
   price: 10890
   brand: Whirlpool
+  link: https://www.amazon.in/Whirlpool-Refrigerator-WDE-205-Roy/dp/B0793D29P2/ref=sr_1_5?crid=R2QS87VKPP39&keywords=whirlpool+refrigerator&qid=1582646435&sprefix=whir%2Caps%2C370&sr=8-5
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/91Y2N3BjAXL._SY679_.jpg
 - name: Whirlpool 240L Frost Free Multi door Silver Refrigerator
   price: 23700
   brand: Whirlpool
+  link: https://www.amazon.in/Whirlpool-Refrigerator-263D-Protton-Roy/dp/B078YHT1FR/ref=sr_1_12?crid=R2QS87VKPP39&keywords=whirlpool+refrigerator&qid=1582646435&sprefix=whir%2Caps%2C370&sr=8-12
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/71La4hoCgYL._SY679_.jpg
 - name: Whirlpool 240L Frost Free Multi door Blue Refrigerator
   price: 23700
   brand: Whirlpool
-- name: Whirlpool 190L 4 star Direct cool Single door Alpha Silver Steel Refrigerator
+  link: https://www.amazon.in/Whirlpool-Refrigerator-263D-Protton-Roy/dp/B078YHT1FR/ref=sr_1_12?crid=R2QS87VKPP39&keywords=whirlpool+refrigerator&qid=1582646435&sprefix=whir%2Caps%2C370&sr=8-12
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/71La4hoCgYL._SY679_.jpg
+- name: Whirlpool 190L 4 star Direct cool Single door Sapphire Radiance Refrigerator
   price: 13740
   brand: Whirlpool
+  link: https://www.amazon.in/Whirlpool-WDE-205-ROY-INV/dp/B083KQFY62/ref=sr_1_3?crid=R2QS87VKPP39&keywords=whirlpool+refrigerator&qid=1582646435&sprefix=whir%2Caps%2C370&sr=8-3
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/5101--gGXHL._SX679_.jpg
 - name: Haier 52L 3 star Direct cool Single door Brushline Silver Refrigerator
   price: 6960
   brand: Haier
+  link: https://www.amazon.in/Haier-Direct-Single-Refrigerator-HR-62VS/dp/B00OTE4X7Y/ref=sr_1_6?keywords=haier+refrigerator&qid=1582646769&sr=8-6
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/91T01IC%2ByFL._SX679_.jpg
 - name: Haier 320L 3 star Frost Free Double door Brushline Silver Refrigerator
   price: 25900
   brand: Haier
-- name: LG 270L 3 star Direct cool Single door Silver Shiny Steel Refrigerator
+  link: https://www.amazon.in/Haier-Refrigerator-HRB-3404BS-R-HRB-3404BS-Brushline/dp/B01ITGO7C8/ref=sr_1_7?keywords=haier+refrigerator&qid=1582646769&sr=8-7
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/81yYuJ7wczL._SY679_.jpg
+- name: LG 260L 3 star Direct cool Single door Silver Shiny Steel Refrigerator
   price: 19899
   brand: LG
+  link: https://www.amazon.in/LG-Refrigerator-GL-I292RPZL-APZZEBN-Inverter-Compressor/dp/B01DM8HR1Q/ref=sr_1_3?crid=3IYSRMERAUH13&keywords=lg+refrigerator&qid=1582646953&sprefix=LG+%2Caps%2C425&sr=8-3
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/51B%2BPLv%2BsvL._SY679_.jpg
 - name: Godrej 200L 3 star Direct cool Single door Scarlet Red Refrigerator
   price: 19899
   brand: Godrej
+  link: https://www.amazon.in/Godrej-Direct-Cool-Refrigerator-2003-3-2/dp/B07Q4716KS/ref=sr_1_4?keywords=godrej+refrigerator&qid=1582647018&sr=8-4
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/71VlDTzuCCL._SX679_.jpg
 
 
 - name: Whirlpool 0.8 Ton 3 star Inverter Copper Split AC White
   price: 22999
   brand: Whirlpool
+  link: https://www.amazon.in/Whirlpool-0-8T-MagiCool-3S-COPR/dp/B079RGJVRH/ref=sr_1_3?keywords=whirlpool+ac&qid=1582647164&sr=8-3
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/51tk0rZopNL._SX679_.jpg
 - name: Whirlpool 1 Ton 3 star Inverter Copper Split AC White
   price: 25999
   brand: Whirlpool
+  link: https://www.amazon.in/Whirlpool-1-0T-MAGICOOL-PRO-COPR/dp/B07P9T4339/ref=sr_1_8?keywords=whirlpool+ac&qid=1582647164&sr=8-8
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/51NS0D3V5vL._SX679_.jpg
 - name: Whirlpool 1.5 Ton 3 star Inverter Copper Split AC White
   price: 28999
   brand: Whirlpool
+  link: https://www.amazon.in/Whirlpool-1-5T-MAGICOOL-ELITE-PRO/dp/B07QKWB17B/ref=sr_1_4?keywords=whirlpool+ac&qid=1582647164&sr=8-4
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/61WmPbmdB2L._SX679_.jpg
 - name: LG 1.5 Ton 5 star Dual Inverter Copper Split AC White
   price: 38999
   brand: LG
-- name: LG 1.5 Ton 3 star Dual Inverter Copper Split AC White
-  price: 35999
-  brand: LG
+  link: https://www.amazon.in/LG-Inverter-Split-Copper-KS-Q18HNZD/dp/B07MYK25X4/ref=sr_1_3?keywords=lg+ac&qid=1582647255&sr=8-3
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/41wxMmCSXqL._SX679_.jpg
 - name: LG 1.5 Ton 5 star Wi-Fi Inverter Copper Window AC White
   price: 33445
   brand: LG
+  link: https://www.amazon.in/LG-Wi-Fi-Inverter-Copper-LS-Q18SWZA/dp/B084THBKGG/ref=sr_1_4?keywords=lg+ac&qid=1582647255&sr=8-4
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/61coM2E4o9L._SX679_.jpg
 - name: LG 1.5 Ton 3 star Inverter Copper Split AC Floral White
   price: 44999
   brand: LG
+  link: https://www.amazon.in/LG-Inverter-Copper-KS-Q18FNXD1-Floral/dp/B07M5GNYTH/ref=sr_1_1?keywords=lg+ac+floral&qid=1582647302&sr=8-1
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/51-otBrpaGL._SX679_.jpg
 - name: Daikin 0.8 Ton 3 star Copper Split AC White
   price: 22490
   brand: Daikin
+  link: https://www.amazon.in/Daikin-Split-Copper-FTL28TV-White/dp/B07WHCSJYZ/ref=sr_1_4?keywords=daikin+ac&qid=1582647130&sr=8-4
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/61YxopK539L._SX679_.jpg
 - name: Godrej 1 Ton 3 star Copper Split AC White
   price: 25900
   brand: Godrej
+  link: https://www.amazon.in/Godrej-Split-Copper-GSC-12RTC3-WRA/dp/B07M7KJ47H/ref=sr_1_3?keywords=godrej+ac&qid=1582647054&sr=8-3
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/714eqCJVhoL._SX679_.jpg
 - name: Voltas 1.2 Ton 3 star Copper Split AC White
   price: 28999
   brand: Voltas
+  link: https://www.amazon.in/Voltas-Inverter-Split-Copper-153V_DZV/dp/B07XV1DLRX/ref=sr_1_1?keywords=voltas+ac&qid=1582647092&sr=8-1
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/51nt5Q2XvfL._SX679_.jpg
