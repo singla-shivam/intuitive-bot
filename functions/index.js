@@ -13,7 +13,6 @@ const {findProduct, confirmCartAdd} = require("./intent_handlers/productDiscover
 
 const {Card, Suggestion} = require('dialogflow-fulfillment');
 const {cartDisplay} = require('./intent_handlers/cart/cartDisplay')
-const {cartChangeQty, cartReceiveExtraTags, cartRemoveItem, cartConfirmQty} = require("./intent_handlers/cart/changeQty");
 const {order, _orderTests, order_confirm} = require('./intent_handlers/productDiscovery/order');
 const {categories} = require('./intent_handlers/productDiscovery/category')
 const {updateEntityOnProductAdd} = require('./entities/tag')
@@ -66,7 +65,6 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   intentMap.set('Orders.find', findOrders)
   intentMap.set('Orders.place', placeOrder)
   intentMap.set('Orders.status', getOrderStatus)
-  intentMap.set('choomantar2', choomantar2);
 
   // intentMap.set('your intent name here', yourFunctionHandler);
   // intentMap.set('your intent name here', googleAssistantHandler);
