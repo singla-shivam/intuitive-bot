@@ -51,6 +51,6 @@ exports.findProduct = async function (agent) {
     // Ask for their confirmation
     response += ` Would you like to add it to your cart?`
     agent.add(response)
-    agent.context.set("discover_confirm_add_cart", 2, {tags, quantity, ordinal})
+    agent.context.set("discover_confirm_add_cart", 1, {tags, quantity, ordinal})
   }
 }

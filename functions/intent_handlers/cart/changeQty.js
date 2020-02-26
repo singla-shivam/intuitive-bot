@@ -8,9 +8,9 @@ const {getCart, setCartItem, removeCartItem} = require("../../database/cart")
  */
 exports.cartConfirmQty = async function (agent) {
   let tags = agent.parameters.tags || [] // Tags from previous request
-  let qty = agent.parameters.quantity // Quantity provided by user
-  console.log("confirmQty Invoked", tags, qty);
-  await _modifyItemQty(agent, tags, qty)
+  let quantity = agent.parameters.quantity // Quantity provided by user
+  console.log("confirmQty Invoked", tags, quantity);
+  await _modifyItemQty(agent, tags, quantity)
 }
 
 /**
@@ -50,14 +50,9 @@ async function _modifyItemQty(agent, tags, quantity) {
   let products = await findProductsByTags(tags, cartItems.map((item) => item.product_id))
   console.log("Modify Item Qty", tags, quantity, products, cartItems)
   let action = `cart`
-  console.log(typeof clarifyWhichProduct)
-  console.log(typeof clarifyWhichProduct.prototype)
-  console.log(typeof clarifyWhichProduct.length)
-  if (await clarifyWhichProduct(agent, products, {
-    quantity,
-    tags,
-    action
-  }) && await _clarifyQuantity(agent, products, quantity, tags)) {
+  // Proceed only if we have a single product and a quantity w
+  if (await clarifyWhichProduct(agent, products, {quantity, tags, action})
+    && await _clarifyQuantity(agent, products, quantity, tags)) {
     if (quantity > 0) {
       await setCartItem(agent, products[0].product_id, quantity)
       agent.add(`Sure thing! Now there ${quantity > 1 ? 'are' : 'is'} ${quantity} ${products[0].name} in your cart.`)
@@ -86,7 +81,7 @@ async function _clarifyQuantity(agent, products, quantity, tags) {
   if (quantity === undefined) {
     // User didn't provided quantity
     agent.add(`How many ${products[0].name} do you need?`)
-    agent.context.set("cart_qty_request", 2, {tags})
+    agent.context.set("cart_qty_request", 1, {tags})
   }
   return quantity !== undefined // True only when quantity provided
 }

@@ -15,10 +15,11 @@ exports.clarifyWhichProduct = async function (agent, products, params) {
   if (products.length === 1) {
     return true // Just one product, no clarification needed
   } else if (products.length === 0) {
-    // User either didnt said product name, or product is not found in cart
     if (params.action === "cart") {
+      // If user didnt said product name
       if (params.tags.length === 0) agent.add(`Alright, Please tell me the product name.`)
       else {
+        // Product is not found in cart
         agent.add(`I could not find it in your cart.`)
         params.tags = []
       }
@@ -43,7 +44,7 @@ exports.clarifyWhichProduct = async function (agent, products, params) {
       agent.add(`${i + 1}. ${productDetails[i].name}`)
     }
   }
-  // Request for additional tags if we couldn't get down to a single product
-  agent.context.set("extra_tag_request", 2, params)
+  // Request for additional tags  if we couldn't get down to a single product
+  agent.context.set("extra_tag_request", 1, params)
   return false
 }
