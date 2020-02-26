@@ -6,6 +6,8 @@ const {getData, addData} = require('./api')
  * @property {string} product_id
  * @property {string} name
  * @property {string} brand
+ * @property {string} imageUrl
+ * @property {string} link
  * @property {number} price
  * @property {object} tags
  */

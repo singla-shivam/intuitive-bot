@@ -53,7 +53,7 @@ exports.clearCart = async function (agent) {
  * Updates quantity of a product of the cart associated with [sessionId]
  * @param {WebhookClient} agent
  * @param {string} productId
- * @param {string} quantity
+ * @param {number} quantity
  * @return {Promise<T>}
  */
 exports.setCartItem = async function (agent, productId, quantity) {
