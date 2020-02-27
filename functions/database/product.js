@@ -107,9 +107,45 @@ exports.findProductsByTags = async function (tags, productIds) {
     const productsAndQueries = productIds.map(id => [...andQueries, ["product_id", "==", id]])
     // get product matching with each productIds and tags
     /** @type ?Promise<Product[]>[]*/
-    const promises = productsAndQueries.map(andQueries => _createTagQuery(andQueries))
+    const promises = productsAndQueries.map(andQueries => _createProductQuery(andQueries))
     return (await Promise.all(promises)).filter(p => p[0]).map(p => p[0])
-  } else return await _createTagQuery(andQueries)
+  } else return await _createProductQuery(andQueries)
+}
+
+/**
+ *
+ * @param {string} property
+ * @param {string | number} upperLimit
+ * @param {string | number} lowerLimit
+ * @return {Promise<Product[]>}
+ */
+exports.findProductsByRange = async function (property, upperLimit, lowerLimit) {
+  /** @type AndQuery[]*/
+  const andQueries =  [
+    [property, '>=', lowerLimit],
+    [property, '<=', upperLimit]
+  ]
+  return await _createProductQuery(andQueries)
+}
+
+/**
+ * NOTE - won't work due to indexes in database
+ * @param {string[]} tags
+ * @param {string} property
+ * @param {string | number} upperLimit
+ * @param {string | number} lowerLimit
+ * @return {Promise<Product[]>}
+ *
+ */
+exports.findProductsByTagsRange = async function (tags, property, upperLimit, lowerLimit) {
+  if(tags.length === 0) return []
+  /** @type AndQuery[]*/
+  const andQueries = tags.map(tag => [`tags.${tag}`, "==", true])
+  andQueries.push(
+    [property, '>=', lowerLimit],
+    [property, '<=', upperLimit]
+  )
+  return await _createProductQuery(andQueries)
 }
 
 /**
@@ -135,7 +171,7 @@ function _createGetProductRequest(ids, operator = '==') {
  * @returns Promise<Product[]>
  * @private
  */
-function _createTagQuery(andQueries) {
+function _createProductQuery(andQueries) {
   return getData({
     path: "products",
     andQueries: andQueries

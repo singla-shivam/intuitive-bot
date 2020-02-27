@@ -16,7 +16,8 @@ const {cartDisplay} = require('./intent_handlers/cart/cartDisplay')
 const {updateEntityOnProductAdd} = require('./entities/tag')
 const {extraTagsReceiver} = require('./intent_handlers/genericMethods/extraTagsReceiver')
 const {cartChangeQty, cartRemoveItem, cartConfirmQty, clearCart} = require("./intent_handlers/cart/changeQty");
-// const {addProduct, findProductsByTags} = require('./database/product')
+
+const {findProductsByTagsRange} = require('./database/product')
 // const {getData} = require('./database/api')
 
 const admin = require('firebase-admin')
@@ -86,10 +87,8 @@ exports.addData = functions.https.onRequest(async (req, res) => {
 
 exports.test = functions.https.onRequest(async (req, res) => {
   if (req.query["key"] === "JJypXlJ0tvLq5tbgx8TA") {
-    await updateEntityOnProductAdd({
-      name: "OnePlus 55 inch QLED TV",
-      price: 69899,
-      brand: "OnePlus"
-    })
+    let result = await findProductsByTagsRange(['TV', 'LG'], 'price', 90000, 40000)
+    console.log(JSON.stringify(result))
+    res.send(result)
   }
 })
