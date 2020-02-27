@@ -79,6 +79,7 @@ exports.addData = async function (options, addId = true) {
  */
 exports.getData = async function (options) {
   console.log("getData", options)
+  console.log("getData", options.andQueries)
   const paths = options.path.split('/')
   const isDocIdProvided = !(paths.length % 2)
 

@@ -49,14 +49,14 @@ async function _listOrders(agent, orders, defaultMessage = "No more orders") {
   if (orders.length === 0) agent.add(defaultMessage)
   else {
     let products = await getProducts(Object.keys(orders[0].items))
-    showListOfOrders(agent, orders[0], products)
+    // showListOfOrders(agent, orders[0], products)
     // showCarousel(agent, products, "Recent Orders2")
-    // orders.forEach(order => {
-    //   agent.add(`Order Id ${order.id} ordered on ${getFormattedDate(order.ordered)}`)
-    //   Object.keys(order.items).forEach((item, i) => {
-    //     agent.add(`${i + 1}. ${item}`)
-    //   })
-    // })
+    orders.forEach(order => {
+      agent.add(`Order Id ${order.id} ordered on ${getFormattedDate(order.ordered)}`)
+      Object.keys(order.items).forEach((item, i) => {
+        agent.add(`${i + 1}. ${item}`)
+      })
+    })
   }
 }
 

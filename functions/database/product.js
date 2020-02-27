@@ -21,6 +21,7 @@ const {getData, addData} = require('./api')
  */
 exports.getProducts = async function (products) {
   // if single product id is give
+  console.log("getProducts", products)
   if (typeof products === 'string') {
     let p = await _createGetProductRequest(products)
     return p.length === 0 ? null : p[0]

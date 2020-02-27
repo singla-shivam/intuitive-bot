@@ -1,3 +1,4 @@
+const {Suggestion} = require('dialogflow-fulfillment')
 const {getCart, setCartItem} = require("../../database/cart")
 const {clarifyWhichProduct} = require("../genericMethods/clarifyProduct")
 const {findProductsByTags} = require("../../database/product")
@@ -26,6 +27,8 @@ exports.confirmCartAdd = async function (agent) {
 
   await setCartItem(agent, product.product_id, quantity)
   agent.add(response)
+  agent.add(new Suggestion(`Place order`))
+  agent.add(new Suggestion(`Show cart`))
 }
 
 /**
@@ -52,5 +55,7 @@ exports.findProduct = async function (agent) {
     response += ` Would you like to add it to your cart?`
     agent.add(response)
     agent.context.set("discover_confirm_add_cart", 1, {tags, quantity, ordinal})
+    agent.add(new Suggestion(`Yes`))
+    agent.add(new Suggestion(`No`))
   }
 }

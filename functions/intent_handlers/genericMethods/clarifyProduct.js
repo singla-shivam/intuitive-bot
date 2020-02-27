@@ -24,7 +24,7 @@ exports.clarifyWhichProduct = async function (agent, products, params) {
         params.tags = []
       }
     } else if (params.action === "discovery") {
-      if (params.tags.length === 0) agent.add(`Alright, What would you like to order today?.`)
+      if (params.tags.length === 0) agent.add(`Sorry, we don't have it in our store. We sell AC, Refrigerators and TV. What would you like to see?`)
       else {
         agent.add(`We don't have something like that in our store yet.`)
         params.tags = []
@@ -32,17 +32,19 @@ exports.clarifyWhichProduct = async function (agent, products, params) {
     }
   } else {
     // Customising replies based on calling
+    let response
     if (params.action === "cart") {
       // Ask for clarifying which item did user meant to say
-      agent.add(`Which of the following items did you meant?`)
+      response = (`Which of the following items did you meant?`)
     } else if (params.action === "discovery") {
       // Display relevant products
-      agent.add(`I have found a few products. Which one do you like?`)
+      response = (`I have found a few products. Which one do you like?`)
     }
     let productDetails = await getProducts(products.map((item) => item.product_id))
     for (let i = 0; i < Math.min(6, products.length); i++) {
       agent.add(`${i + 1}. ${productDetails[i].name}`)
     }
+    agent.add(response)
   }
   // Request for additional tags  if we couldn't get down to a single product
   agent.context.set("extra_tag_request", 1, params)
