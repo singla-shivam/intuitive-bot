@@ -4,6 +4,12 @@ const {getData, addData} = require('./api')
  * @typedef Product
  * @type object
  * @property {string} product_id
+ * @property {string} name
+ * @property {string} brand
+ * @property {string} imageUrl
+ * @property {string} link
+ * @property {number} price
+ * @property {object} tags
  */
 
 /**
@@ -15,11 +21,40 @@ const {getData, addData} = require('./api')
  */
 exports.getProducts = async function (products) {
   // if single product id is give
+  console.log("getProducts", products)
   if (typeof products === 'string') {
     let p = await _createGetProductRequest(products)
     return p.length === 0 ? null : p[0]
+  } else if (typeof products === 'object' && products.length === 0) return [] //@author satyamcse
+  else {
+    // if less than 10 product ids are provided because in op works with max 10 objects
+    if(products.length <= 10) (await _createGetProductRequest(products, 'in'))
+    else {
+      /** @type Promise<Product[]>[] */
+      let promises = []
+      let i = 0;
+      while (i < products.length) {
+        promises.push(_createGetProductRequest(products.slice(i, i + 10), 'in'))
+        i += 10
+      }
+      let result = await Promise.all(promises)
+      let productsDetails = []
+      result.forEach(a => {
+        productsDetails = productsDetails.concat(a)
+      })
+      return productsDetails
+    }
   }
-  else return (await _createGetProductRequest(products, 'in'))
+}
+
+/**
+ * Function to get categories that cover all the products
+ * @param {String[]} products: Is set from which categories is to be picked, if absent all products
+ * @return {Promise<string[]>}
+ * @author satyamcse
+ */
+exports.getProductCategories = async function (products) {
+  return [`TV`, `AC`, `Refrigerator`]
 }
 
 /**
@@ -62,10 +97,11 @@ exports.addProduct = async function (brand, name, price, tags) {
  * @returns {Promise<Product[]>}
  */
 exports.findProductsByTags = async function (tags, productIds) {
+  if (tags.length === 0 || (productIds && productIds.length === 0)) return []
   /** @type AndQuery[]*/
   const andQueries = tags.map(tag => [`tags.${tag}`, "==", true])
 
-  if (productIds && productIds.length > 0) {
+  if (productIds) {
     // get and queries correspond to productIds
     /** @type AndQuery[][]*/
     const productsAndQueries = productIds.map(id => [...andQueries, ["product_id", "==", id]])

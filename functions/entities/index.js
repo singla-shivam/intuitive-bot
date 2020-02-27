@@ -1,4 +1,12 @@
 const d = require('dialogflow')
+const yaml = require('js-yaml')
+const fs = require('fs')
+
+/**
+ * @typedef Synonyms
+ * @type {Object.<string, []>}
+ */
+
 /**
  * @type {object}
  * @property {v2.EntityTypesClient} EntityTypesClient

@@ -1,15 +1,21 @@
-// See https://github.com/dialogflow/dialogflow-fulfillment-nodejs
-// for Dialogflow fulfillment library docs, samples, and to report issues
-// hello world comment 2
-'use strict';
-
 const functions = require('firebase-functions');
-const {cartDisplay} = require('./intent_handlers/cart/cartDisplay')
-const {choomantar} = require('./intent_handlers/productDiscovery/choomantar')
 const {WebhookClient} = require('dialogflow-fulfillment');
-// const {Card, Suggestion} = require('dialogflow-fulfillment');
 
-const {updateTag} = require('./entities/tag')
+const {choomantar, choomantar2} = require('./intent_handlers/productDiscovery/choomantar')
+
+const {listRecentOrders, findOrders} = require('./intent_handlers/orders/listOrder')
+const {placeOrder} = require('./intent_handlers/orders/placeOrder')
+const {getOrderStatus} = require('./intent_handlers/orders/statusOrder')
+
+const {addData} = require('./data')
+
+const {findProduct, confirmCartAdd} = require("./intent_handlers/productDiscovery/findProduct")
+
+const {Card, Suggestion} = require('dialogflow-fulfillment');
+const {cartDisplay} = require('./intent_handlers/cart/cartDisplay')
+const {updateEntityOnProductAdd} = require('./entities/tag')
+const {extraTagsReceiver} = require('./intent_handlers/genericMethods/extraTagsReceiver')
+const {cartChangeQty, cartRemoveItem, cartConfirmQty, clearCart} = require("./intent_handlers/cart/changeQty");
 // const {addProduct, findProductsByTags} = require('./database/product')
 // const {getData} = require('./database/api')
 
@@ -19,12 +25,12 @@ admin.initializeApp(functions.config().firebase)
 process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
 
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request, response) => {
-  const agent = new WebhookClient({ request, response });
+  const agent = new WebhookClient({request, response});
   console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
   console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
 
   function welcome(agent) {
-    agent.add(`Welcome to my agent!`);
+    agent.add(`How may I help you.`);
   }
 
   function fallback(agent) {
@@ -36,10 +42,27 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   let intentMap = new Map();
   intentMap.set('Default Welcome Intent', welcome);
   intentMap.set('Default Fallback Intent', fallback);
-  //intentMap.set('order.product', addItemsToCart);
+  // Product discover related methods
+  intentMap.set('discover.find_product', findProduct);
+  intentMap.set('price.check', findProduct); // Merged to reduce complexity
+  // Duplicate intentions, similar logic req. for handling requests
+  intentMap.set('discover.confirm_add_cart', confirmCartAdd);
+  intentMap.set('discover.confirm_add_cart_with_qty', confirmCartAdd);
+  // Cart related methods
   intentMap.set('cart.display', cartDisplay);
+  intentMap.set('cart.changeQty', cartChangeQty);
+  intentMap.set('cart.clear', clearCart);
+  intentMap.set('receive_extra_tags', extraTagsReceiver);
+  intentMap.set('cart.confirmQty', cartConfirmQty);
+  intentMap.set('cart.remove-item', cartRemoveItem);
   intentMap.set('choomantar', choomantar);
   //intentMap.set('cart.display - yes', confirmOrder);
+  intentMap.set('Orders.recent', listRecentOrders)
+  intentMap.set('Orders.recent.showMore', listRecentOrders)
+  intentMap.set('Orders.find', findOrders)
+  intentMap.set('Orders.place', placeOrder)
+  intentMap.set('Orders.place - yes', placeOrder)
+  intentMap.set('Orders.status', getOrderStatus)
 
   // intentMap.set('your intent name here', yourFunctionHandler);
   // intentMap.set('your intent name here', googleAssistantHandler);
@@ -51,26 +74,22 @@ exports.entityUpdate = functions.firestore
   .onCreate(async (document, context) => {
     const productId = context.params["productId"]
     const data = document.data()
-
     console.log("created product", JSON.stringify(data))
-
-    return Promise.all([
-      updateTag(Object.keys(data.tags))
-    ])
+    return await updateEntityOnProductAdd(data)
   })
+
+exports.addData = functions.https.onRequest(async (req, res) => {
+  if (req.query["key"] === "JJypXlJ0tvLq5tbgx8TA") {
+    return await addData()
+  }
+})
 
 exports.test = functions.https.onRequest(async (req, res) => {
   if (req.query["key"] === "JJypXlJ0tvLq5tbgx8TA") {
-    // await addProduct("Dairy Milk", "Dairy Milk Silk Bubbly", 70, ["food", "chocolate"])
-    // await addProduct("Dairy Milk", "Dairy Milk Fivestar 15gm", 10, ["food", "chocolate"])
-    // await addProduct("KitKat", "KitKat 4pc", 20, ["food", "chocolate"])
-    // await addProduct("CocaCola", "CocaCola 600ml", 40, ["food", "beverage", "cold drink", "soft drink"])
-    // await addProduct("CocaCola", "CocaCola 1Litre", 60, ["food", "beverage", "cold drink", "soft drink"])
-    // await addProduct("CocaCola", "CocaCola 2Litre", 110, ["food", "beverage", "cold drink", "soft drink"])
-
-    // let result = await getData({
-    //   path: "products/2YR9z8moKlknDkXwomVk"
-    // })
-    // console.log("result", result)
+    await updateEntityOnProductAdd({
+      name: "OnePlus 55 inch QLED TV",
+      price: 69899,
+      brand: "OnePlus"
+    })
   }
 })
