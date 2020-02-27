@@ -1,0 +1,37 @@
+- name: LG 75 inch 4K UHD LED Smart TV
+  price: 169900
+  brand: LG
+  link: https://www.amazon.in/LG-inches-Smart-75UM7600PTA-Titanium/dp/B07STRHPC2/ref=sr_1_15?keywords=lg+led+tv&qid=1582820376&sr=8-15
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/81f51uTEdLL._SX450_.jpg
+- name: LG 49 inch 4K UHD LED Smart TV
+  price: 63999
+  brand: LG
+  link: https://www.amazon.in/LG-inches-Nano-Cell-49SM8100PTA-Ceramic/dp/B07SJ7CBGP/ref=sr_1_17?keywords=lg+led+tv&qid=1582820376&sr=8-17
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/916NZaEEBOL._SX450_.jpg
+- name: LG 55 inch 4K UHD LED Smart TV
+  price: 105999
+  brand: LG
+  link: https://www.amazon.in/LG-inches-Ultra-NanoCell-55SM9000PTA/dp/B07TBMSTG7/ref=sr_1_18?keywords=lg+led+tv&qid=1582820376&sr=8-18
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/91tNADyZ0BL._SX450_.jpg
+
+- name: Samsung 49 inch FHD LED Smart TV
+  price: 39999
+  brand: Samsung
+  link: https://www.amazon.in/Samsung-inches-Smart-49N5300-Black/dp/B07F1PQH94/ref=sr_1_13?keywords=samsung+led&qid=1582820636&sr=8-13
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/81XU0nOD21L._SX450_.jpg
+- name: Samsung 21 inch LED Smart TV
+  price: 145999
+  brand: Samsung
+  link: https://www.amazon.in/samsung-led-inch-Ready-32n4003/dp/B07L981NN8/ref=sr_1_16?keywords=samsung+led&qid=1582820636&sr=8-16
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/81Hti9MqviL._SX450_.jpg
+- name: Samsung 27 inch LED Smart TV
+  price: 17899
+  brand: Samsung
+  link: https://www.amazon.in/Samsung-inch-Curved-Bezel-Monitor/dp/B01N6W8QRA/ref=sr_1_17?keywords=samsung+led&qid=1582820636&sr=8-17
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/71Dwx3x6m9L._SX679_.jpg
+
+- name: Mi 43 inch FHD LED Android TV
+  price: 21999
+  brand: Xiomi
+  link: https://www.amazon.in/Mi-LED-Full-Android-Black/dp/B07T89Z35Z/ref=sr_1_5?keywords=mi+led&qid=1582820856&sr=8-5
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/81ulud8aUaL._SX450_.jpg
