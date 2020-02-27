@@ -9,12 +9,13 @@ const {getOrderStatus} = require('./intent_handlers/orders/statusOrder')
 
 const {addData} = require('./data')
 
+const {findProduct, confirmCartAdd} = require("./intent_handlers/productDiscovery/findProduct")
+
 const {Card, Suggestion} = require('dialogflow-fulfillment');
 const {cartDisplay} = require('./intent_handlers/cart/cartDisplay')
-const {cartChangeQty, cartReceiveExtraTags, cartRemoveItem, cartConfirmQty} = require("./intent_handlers/cart/changeQty");
-const {order, _orderTests, order_confirm} = require('./intent_handlers/productDiscovery/order');
-const {categories} = require('./intent_handlers/productDiscovery/category')
 const {updateEntityOnProductAdd} = require('./entities/tag')
+const {extraTagsReceiver} = require('./intent_handlers/genericMethods/extraTagsReceiver')
+const {cartChangeQty, cartRemoveItem, cartConfirmQty, clearCart} = require("./intent_handlers/cart/changeQty");
 // const {addProduct, findProductsByTags} = require('./database/product')
 // const {getData} = require('./database/api')
 
@@ -41,15 +42,17 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   let intentMap = new Map();
   intentMap.set('Default Welcome Intent', welcome);
   intentMap.set('Default Fallback Intent', fallback);
-  //NTC PART Begin
-  intentMap.set('Order', order);
-  intentMap.set('Category_order - in_category', categories)
-  intentMap.set('Order - yes', order_confirm)
-  //NTC PART END
-  //intentMap.set('order.product', addItemsToCart);
+  // Product discover related methods
+  intentMap.set('discover.find_product', findProduct);
+  intentMap.set('price.check', findProduct); // Merged to reduce complexity
+  // Duplicate intentions, similar logic req. for handling requests
+  intentMap.set('discover.confirm_add_cart', confirmCartAdd);
+  intentMap.set('discover.confirm_add_cart_with_qty', confirmCartAdd);
+  // Cart related methods
   intentMap.set('cart.display', cartDisplay);
   intentMap.set('cart.changeQty', cartChangeQty);
-  intentMap.set('cart.get_extra_tags', cartReceiveExtraTags);
+  intentMap.set('cart.clear', clearCart);
+  intentMap.set('receive_extra_tags', extraTagsReceiver);
   intentMap.set('cart.confirmQty', cartConfirmQty);
   intentMap.set('cart.remove-item', cartRemoveItem);
   intentMap.set('choomantar', choomantar);
@@ -58,8 +61,8 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   intentMap.set('Orders.recent.showMore', listRecentOrders)
   intentMap.set('Orders.find', findOrders)
   intentMap.set('Orders.place', placeOrder)
+  intentMap.set('Orders.place - yes', placeOrder)
   intentMap.set('Orders.status', getOrderStatus)
-  intentMap.set('choomantar2', choomantar2);
 
   // intentMap.set('your intent name here', yourFunctionHandler);
   // intentMap.set('your intent name here', googleAssistantHandler);

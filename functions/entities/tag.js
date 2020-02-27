@@ -1,6 +1,7 @@
 const yaml = require('js-yaml')
 const fs = require('fs')
 const {entitiesClient, tagEntityPath, updateEntity} = require('./')
+const {addData} = require('../database/api')
 
 const QUANTIFIER_REGEX = /\d(l|ml|g|mg|kg|ton)/
 const quantifiersSynonyms = {
@@ -38,7 +39,7 @@ async function updateTag(tags, synonyms) {
  * @return {Promise<void>}
  */
 async function updateEntityOnProductAdd(product) {
-  const tags = product.tags || {}
+  let tags = product.tags || {}
   const possibleTags = product.name.split(' ')
   let previousTag = ''
   possibleTags.forEach(tag => {
@@ -55,7 +56,17 @@ async function updateEntityOnProductAdd(product) {
     }
   })
 
-  const tagsArray = _removeBrandTags(tags, product.brand)
+  let tagsArray
+  [tagsArray, tags] = _removeBrandTags(tags, product.brand)
+  console.log(tagsArray, tags)
+  // update product with tags
+  await addData({
+    path: `products/${product.product_id}`,
+    value: {
+      tags
+    },
+    merge: true
+  })
   const synonyms = _addSynonyms(tagsArray)
 
   await updateTag(tagsArray, synonyms)
@@ -65,7 +76,7 @@ async function updateEntityOnProductAdd(product) {
  * Remove tags which are brand name
  * @param {Object<string, boolean>} tags
  * @param {string} brand
- * @return {string[]}
+ * @return
  * @private
  */
 function _removeBrandTags(tags, brand) {
@@ -78,7 +89,7 @@ function _removeBrandTags(tags, brand) {
     if(brandTags[tag]) delete tags[tag]
   }
   tags[brand] = true
-  return Object.keys(tags)
+  return [Object.keys(tags), tags]
 }
 
 /**

@@ -7,14 +7,11 @@ async function addData() {
   const products = yaml.safeLoad(fs.readFileSync(`${__dirname}/lowesData2.yaml`, 'utf8'))
 
   const batch  = firestore().batch()
-  // products.forEach(product => {
-  //   const doc = firestore().collection("products").doc()
-  //   product.product_id = doc.id
-  //   batch.set(doc, product)
-  // })
-  const doc = firestore().collection("products").doc()
-  products[0].product_id = doc.id
-  batch.set(doc, products[0])
+  products.forEach(product => {
+    const doc = firestore().collection("products").doc()
+    product.product_id = doc.id
+    batch.set(doc, product)
+  })
   await batch.commit()
 }
 

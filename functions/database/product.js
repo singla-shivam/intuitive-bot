@@ -6,6 +6,8 @@ const {getData, addData} = require('./api')
  * @property {string} product_id
  * @property {string} name
  * @property {string} brand
+ * @property {string} imageUrl
+ * @property {string} link
  * @property {number} price
  * @property {object} tags
  */
@@ -19,11 +21,22 @@ const {getData, addData} = require('./api')
  */
 exports.getProducts = async function (products) {
   // if single product id is give
+  console.log("getProducts", products)
   if (typeof products === 'string') {
     let p = await _createGetProductRequest(products)
     return p.length === 0 ? null : p[0]
   } else if (typeof products === 'object' && products.length === 0) return [] //@author satyamcse
   else return (await _createGetProductRequest(products, 'in'))
+}
+
+/**
+ * Function to get categories that cover all the products
+ * @param {String[]} products: Is set from which categories is to be picked, if absent all products
+ * @return {Promise<string[]>}
+ * @author satyamcse
+ */
+exports.getProductCategories = async function (products) {
+  return [`TV`, `AC`, `Refrigerator`]
 }
 
 /**

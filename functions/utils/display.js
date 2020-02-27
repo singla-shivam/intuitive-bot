@@ -88,12 +88,9 @@ function _createOptionItems(products) {
       description: product.name,
       image: new Image({
         url: product.imageUrl,
-        alt: product.name,
       })
     }
   })
-
-  console.log(items)
 
   return items
 }
