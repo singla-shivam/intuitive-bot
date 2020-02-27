@@ -1,10 +1,5 @@
 <template>
   <div class="bot">
-<!--    <iframe-->
-<!--      class="iframe"-->
-<!--      allow="microphone;"-->
-<!--      src="https://console.dialogflow.com/api-client/demo/embedded/intuitiveBot">-->
-<!--    </iframe>-->
   </div>
 </template>
 
@@ -12,12 +7,6 @@
   export default {
     name: "Bot",
     mounted() {
-      const iframe = document.querySelector(".iframe")
-      iframe.onload = function () {
-        console.log(iframe.style.height)
-        if(window.innerHeight <= 600) iframe.style.height = window.innerHeight + 'px'
-        console.log(iframe.style.height)
-      }
     }
   }
 </script>

@@ -6,7 +6,21 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>Intuitive Bot</title>
-    <script src='https://cdn.jsdelivr.net/gh/mishushakov/df-btn/df-btn.min.js' id='df-btn' project='intuitivebot' width="400px" height="500px"></script>
+    <style>
+      .df-btn-text2 {
+        min-width: 56px;
+        color: #3c4043;
+        display: inline-flex;
+        align-items: center;
+        font-weight: 500;
+        letter-spacing: .25px;
+        transition: all .08s linear;
+        padding: 0 24px 0 0;
+        font-size: 1.25rem;
+        height: 48px;
+        padding-left: 16px;
+      }
+    </style>
   </head>
   <body>
     <noscript>
@@ -14,5 +28,14 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <script src='https://cdn.jsdelivr.net/gh/mishushakov/df-btn/df-btn.min.js' id='df-btn' project='intuitivebot' width="400px" height="500px"></script>
+    <script>
+      document.querySelector('.df-btn').click()
+      document.querySelector('.df-btn').onclick = ''
+      document.querySelector('.df-btn-text').remove()
+      let d = document.createElement('div')
+      d.innerHTML = '<div class="df-btn-text2">Intuitive Bot</div>'
+      document.querySelector('.df-btn').prepend(d)
+    </script>
   </body>
 </html>

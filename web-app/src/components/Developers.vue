@@ -23,10 +23,6 @@
           name: "Shivam Singla",
           link: "https://www.linkedin.com/in/singla-shivam/",
           photo: "https://media-exp1.licdn.com/dms/image/C5103AQGYA1jXu4eeEQ/profile-displayphoto-shrink_200_200/0?e=1587600000&v=beta&t=2H31sIRN6UKZ9fjdkeRxa9bN4clqUUTXjYKsoiO-TZg"
-        }, {
-          name: "Nikesh Thapa",
-          link: "https://www.linkedin.com/in/nikesh-thapa-3b99b0164/",
-          photo: "https://media-exp1.licdn.com/dms/image/C5103AQEs79X5s0Qi-Q/profile-displayphoto-shrink_200_200/0?e=1587600000&v=beta&t=kanB5d6VxPN_H52GVnBMnE4u5frrsOsoWn0xUvVOpsQ"
         }]
 
       }
