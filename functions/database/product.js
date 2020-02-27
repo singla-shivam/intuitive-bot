@@ -26,7 +26,25 @@ exports.getProducts = async function (products) {
     let p = await _createGetProductRequest(products)
     return p.length === 0 ? null : p[0]
   } else if (typeof products === 'object' && products.length === 0) return [] //@author satyamcse
-  else return (await _createGetProductRequest(products, 'in'))
+  else {
+    // if less than 10 product ids are provided because in op works with max 10 objects
+    if(products.length <= 10) (await _createGetProductRequest(products, 'in'))
+    else {
+      /** @type Promise<Product[]>[] */
+      let promises = []
+      let i = 0;
+      while (i < products.length) {
+        promises.push(_createGetProductRequest(products.slice(i, i + 10), 'in'))
+        i += 10
+      }
+      let result = await Promise.all(promises)
+      let productsDetails = []
+      result.forEach(a => {
+        productsDetails = productsDetails.concat(a)
+      })
+      return productsDetails
+    }
+  }
 }
 
 /**
