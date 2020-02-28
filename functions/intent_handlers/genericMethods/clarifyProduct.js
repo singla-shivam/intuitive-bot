@@ -1,5 +1,6 @@
+const {showCarousel} = require("../../utils/display")
 const {getProducts} = require("../../database/product")
-
+const {Suggestion} = require('dialogflow-fulfillment')
 /**
  * Helper method that requests user for more clarity on the product they intended in the request
  * @param {WebhookClient} agent
@@ -24,8 +25,13 @@ exports.clarifyWhichProduct = async function (agent, products, params) {
         params.tags = []
       }
     } else if (params.action === "discovery") {
-      if (params.tags.length === 0) agent.add(`Sorry, we don't have it in our store. We sell AC, Refrigerators and TV. What would you like to see?`)
-      else {
+      if (params.tags.length === 0) {
+        agent.add(`Sorry, we don't have it in our store. We sell AC, Refrigerators and TV. What would you like to see?`)
+        agent.add(new Suggestion('AC'))
+        agent.add(new Suggestion('TV'))
+        agent.add(new Suggestion('Refrigerator'))
+
+      } else {
         agent.add(`We don't have something like that in our store yet.`)
         params.tags = []
       }
@@ -38,15 +44,28 @@ exports.clarifyWhichProduct = async function (agent, products, params) {
       response = (`Which of the following items did you meant?`)
     } else if (params.action === "discovery") {
       // Display relevant products
-      response = (`I have found a few products. Which one do you like?`)
+      response = (`I have found a few products from our store.`)
     }
     let productDetails = await getProducts(products.map((item) => item.product_id))
-    for (let i = 0; i < Math.min(6, products.length); i++) {
-      agent.add(`${i + 1}. ${productDetails[i].name}`)
+    showCarousel(agent, productDetails.slice(0, 6), response)
+    if (products.length > 5) {
+      agent.add(`Do you prefer any specific brand?`)
+      let brands = _extractBrands(productDetails)
+      console.log(brands)
+      brands.forEach((brand) => agent.add(new Suggestion(brand)))
     }
-    agent.add(response)
   }
   // Request for additional tags  if we couldn't get down to a single product
   agent.context.set("extra_tag_request", 1, params)
   return false
+}
+
+function _extractBrands(productDetails) {
+  console.log(productDetails)
+  let brands = new Set()
+  for (let i = 0; i < productDetails.length; i++) {
+    let brand = productDetails[i].brand
+    if (!brands.has(brand)) brands.add(brand)
+  }
+  return brands
 }

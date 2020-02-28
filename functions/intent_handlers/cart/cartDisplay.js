@@ -1,5 +1,6 @@
 const {getProducts} = require("../../database/product");
 const {getCart} = require("../../database/cart");
+const {Suggestion} = require('dialogflow-fulfillment')
 
 exports.cartDisplay = async function (agent) {
   console.log("cartDisplay Invoked");
@@ -20,6 +21,8 @@ exports.cartDisplay = async function (agent) {
   if (totalItems) {
     response = `You have total ${totalItems} item${totalItems > 1 ? 's' : ''} in your cart amounting to Rs. ${totalPrice}.`
     response += ` Would you like to place an order?`
+    agent.add(new Suggestion('Yes'))
+    agent.add(new Suggestion('No'))
     cartItemDetails.forEach((item, index) =>
       agent.add(`${index + 1}. ${item.name},  Rs.${item.price}/item,  Qty: ${cartItems[index].quantity}`)
     )
