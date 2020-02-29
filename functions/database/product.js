@@ -28,7 +28,11 @@ exports.getProducts = async function (products) {
   } else if (typeof products === 'object' && products.length === 0) return [] //@author satyamcse
   else {
     // if less than 10 product ids are provided because in op works with max 10 objects
-    if(products.length <= 10) (await _createGetProductRequest(products, 'in'))
+    if(products.length <= 10) {
+      const res = await _createGetProductRequest(products, 'in')
+      console.log('getProducts', res)
+      return res
+    }
     else {
       /** @type Promise<Product[]>[] */
       let promises = []

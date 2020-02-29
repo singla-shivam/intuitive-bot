@@ -19,8 +19,7 @@ function showCarousel(agent, products, message, quantities = undefined) {
   else {
     let items = _createOptionItems(products, quantities)
 
-    _startConv(agent, message, new Carousel({
-      title: 'Ordered',
+    _startConv(agent, message, new BrowseCarousel({
       items
     }))
   }
