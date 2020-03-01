@@ -1,5 +1,6 @@
 const {findProductsByTags} = require('./../../database/product')
 const {checkTV, clarifyProductForFAQ, setContextForCartConfirm, getAllTags} = require('../../utils')
+const {Suggestion} = require('dialogflow-fulfillment')
 /**
  *
  * @param {WebhookClient} agent
@@ -24,6 +25,7 @@ async function handleWarrantyIntent(agent) {
   // if the ordinal was passed or only one product was fetched using the passed tags
   if (index !== undefined || products.length === 1) {
     agent.add(`The product comes with warranty of one year.`)
+    agent.add(new Suggestion('Add to cart'))
     setContextForCartConfirm(agent, tags, quantity, ordinal)
   } else {
     clarifyProductForFAQ(agent, tags, quantity, 'faq', 'guaranty')

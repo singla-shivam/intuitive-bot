@@ -1,5 +1,6 @@
 const {findProductsByTags} = require('./../../database/product')
 const {getAllTags, checkTV, showFAQMessage, clarifyProductForFAQ, setContextForCartConfirm} = require('../../utils')
+const {Suggestion} = require('dialogflow-fulfillment')
 
 /**
  *
@@ -26,6 +27,7 @@ async function handleDiscountIntent(agent) {
   if (index !== undefined || products.length === 1) {
     let product = products[index || 0]
     showFAQMessage(agent, `The discount on ${product.name} is Rs.${product.mrp - product.price}(${_calculateDiscount(product.mrp, product.price)}%). The MRP in Rs.${product.mrp}`)
+    agent.add(new Suggestion('Add to cart'))
     setContextForCartConfirm(agent, tags, quantity, ordinal)
   } else {
     clarifyProductForFAQ(agent, tags, quantity, 'faq', 'guaranty')

@@ -20,10 +20,16 @@ async function placeOrder(agent) {
     items: _getOrderItems(cartItems, cartItemDetails)
   }
   console.log(order)
+  let price = 0
+  let quantity = 0
+  for(let i in order.items){
+    price += order.items[i].price * order.items[i].quantity
+    quantity += order.items[i].quantity
+  }
 
   await addOrders(agent, order)
   await clearCart(agent)
-  agent.add("Your ordered has been placed.")
+  agent.add(`Your oder amounting to Rs.${price} has been placed. ${quantity} items will be delivered to you within next 24 hours.`)
   agent.add("Thank you for shopping with us. 😀")
 
 }

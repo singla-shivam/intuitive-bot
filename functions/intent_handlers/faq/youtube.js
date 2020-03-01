@@ -26,7 +26,11 @@ async function handleYoutubeIntent(agent) {
   // if the ordinal was passed or only one product was fetched using the passed tags
   if (index !== undefined || products.length === 1) {
     let product = products[index || 0]
-    if(product.smart_tv) agent.add(`Yes, you can stream videos from YouTube, Netflix, Prime Video and Hotstar.`)
+    if(product.smart_tv) {
+      agent.add(`Yes, you can stream videos from YouTube, Netflix, Prime Video and Hotstar.`)
+      agent.add(new Suggestion('Add to cart'))
+      setContextForCartConfirm(agent, tags, quantity, ordinal)
+    }
     else {
       agent.add(`No it does support`)
       new Suggestion('Show smart tvs')

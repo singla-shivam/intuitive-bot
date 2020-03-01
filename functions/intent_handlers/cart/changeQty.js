@@ -1,3 +1,5 @@
+const {Suggestion} = require('dialogflow-fulfillment')
+
 const {clearCart} = require("../../database/cart")
 const {clarifyWhichProduct} = require('../genericMethods/clarifyProduct')
 const {findProductsByTags} = require("../../database/product")
@@ -56,6 +58,8 @@ async function _modifyItemQty(agent, tags, quantity) {
     if (quantity > 0) {
       await setCartItem(agent, products[0].product_id, quantity)
       agent.add(`Sure thing! Now there ${quantity > 1 ? 'are' : 'is'} ${quantity} ${products[0].name} in your cart.`)
+      agent.add(new Suggestion('Show cart'))
+      agent.add(new Suggestion('Place order'))
     } else {
       await _deleteItem(agent, products)
     }
