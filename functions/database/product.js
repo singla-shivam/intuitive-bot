@@ -10,6 +10,13 @@ const {getData, addData} = require('./api')
  * @property {string} link
  * @property {number} price
  * @property {object} tags
+ * // tv attributes
+ * @property {number} [mrp]
+ * @property {number} [display_size]
+ * @property {number} [waranty]
+ * @property {string} [screen_type]
+ * @property {string} [resolution]
+ * @property {boolean} [smart_tv]
  */
 
 /**

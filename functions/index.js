@@ -17,6 +17,13 @@ const {updateEntityOnProductAdd} = require('./entities/tag')
 const {extraTagsReceiver} = require('./intent_handlers/genericMethods/extraTagsReceiver')
 const {cartChangeQty, cartRemoveItem, cartConfirmQty, clearCart} = require("./intent_handlers/cart/changeQty");
 
+// FAQ intents
+const {
+  handleGuarantyIntent,
+  handleWarrantyIntent,
+  handleDiscountIntent
+} = require('./intent_handlers/faq')
+
 const {findProductsByTagsRange} = require('./database/product')
 // const {getData} = require('./database/api')
 
@@ -64,6 +71,11 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   intentMap.set('Orders.place', placeOrder)
   intentMap.set('Orders.place - yes', placeOrder)
   intentMap.set('Orders.status', getOrderStatus)
+
+  // FAQ
+  intentMap.set('faq.guaranty', handleGuarantyIntent)
+  intentMap.set('faq.warranty', handleWarrantyIntent)
+  intentMap.set('faq.discount', handleDiscountIntent)
 
   // intentMap.set('your intent name here', yourFunctionHandler);
   // intentMap.set('your intent name here', googleAssistantHandler);

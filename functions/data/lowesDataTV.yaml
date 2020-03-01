@@ -1,0 +1,170 @@
+- name: LG 75 inch 4K UHD LED Smart TV
+  price: 169900
+  brand: LG
+  link: https://www.amazon.in/LG-inches-Smart-75UM7600PTA-Titanium/dp/B07STRHPC2/ref=sr_1_15?keywords=lg+led+tv&qid=1582820376&sr=8-15
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/81f51uTEdLL._SX450_.jpg
+  mrp:
+  display_size:
+  screen_type:
+  resolution:
+  waranty:
+  smart_tv:
+
+- name: LG 49 inch 4K UHD LED Smart TV
+  price: 63999
+  brand: LG
+  link: https://www.amazon.in/LG-inches-Nano-Cell-49SM8100PTA-Ceramic/dp/B07SJ7CBGP/ref=sr_1_17?keywords=lg+led+tv&qid=1582820376&sr=8-17
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/916NZaEEBOL._SX450_.jpg
+  mrp: 67000
+  display_size: 49
+  screen_type: LED
+  resolution: UHD
+  waranty: 1
+  smart_tv: true
+
+- name: LG 55 inch 4K UHD LED Smart TV
+  price: 105999
+  brand: LG
+  link: https://www.amazon.in/LG-inches-Ultra-NanoCell-55SM9000PTA/dp/B07TBMSTG7/ref=sr_1_18?keywords=lg+led+tv&qid=1582820376&sr=8-18
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/91tNADyZ0BL._SX450_.jpg
+  mrp: 110000
+  display_size: 55
+  screen_type: LED
+  resolution: UHD
+  waranty: 1
+  smart_tv: true
+
+- name: LG 32 inch HD Ready LED Smart TV
+  price: 14999
+  brand: LG
+  link: https://www.amazon.in/LG-Inches-Ready-32LM560BPTC-Display/dp/B07TMFQMJC/ref=sr_1_3?keywords=lg+led+tv&qid=1582646411&sr=8-3
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/71%2BTheDgDgL._SX450_.jpg
+  mrp: 16000
+  display_size: 32
+  screen_type: LED
+  resolution: HD
+  waranty: 1
+  smart_tv: true
+
+- name: LG 43 inch 4K UHD LED Smart TV
+  price: 35999
+  brand: LG
+  link: https://www.amazon.in/LG-inches-Smart-43UM7290PTF-Ceramic/dp/B07TMFV9NN/ref=sr_1_5?keywords=lg+led+tv&qid=1582646411&sr=8-5
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/912Mfy9s3GL._SX450_.jpg
+  mrp: 38000
+  display_size: 43
+  screen_type: LED
+  resolution: UHD
+  waranty: 1
+  smart_tv: true
+
+
+- name: Samsung 49 inch FHD LED Smart TV
+  price: 39999
+  brand: Samsung
+  link: https://www.amazon.in/Samsung-inches-Smart-49N5300-Black/dp/B07F1PQH94/ref=sr_1_13?keywords=samsung+led&qid=1582820636&sr=8-13
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/81XU0nOD21L._SX450_.jpg
+  mrp: 45000
+  display_size: 49
+  screen_type: LED
+  resolution: FHD
+  waranty: 1
+  smart_tv: true
+
+- name: Samsung 21 inch LED Smart TV
+  price: 14999
+  brand: Samsung
+  link: https://www.amazon.in/samsung-led-inch-Ready-32n4003/dp/B07L981NN8/ref=sr_1_16?keywords=samsung+led&qid=1582820636&sr=8-16
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/81Hti9MqviL._SX450_.jpg
+  mrp: 17500
+  display_size: 21
+  screen_type: LED
+  resolution: FHD
+  waranty: 1
+  smart_tv: true
+
+- name: Samsung 27 inch LED Smart TV
+  price: 17899
+  brand: Samsung
+  link: https://www.amazon.in/Samsung-inch-Curved-Bezel-Monitor/dp/B01N6W8QRA/ref=sr_1_17?keywords=samsung+led&qid=1582820636&sr=8-17
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/71Dwx3x6m9L._SX679_.jpg
+  mrp: 20100
+  display_size: 27
+  screen_type: LED
+  resolution: FHD
+  waranty: 1
+  smart_tv: true
+
+- name: Samsung 43 inch 4K UHD LED TV
+  price: 35999
+  brand: Samsung
+  link: https://www.amazon.in/Samsung-108cms-inches-Smart-43N5300/dp/B07F1PZLKJ/ref=sr_1_2_sspa?keywords=samsung+led+tv&qid=1582646244&sr=8-2-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUFCWUo1TjdBU1k3ODAmZW5jcnlwdGVkSWQ9QTA2NzUxMzUzT0xDNVRNUVBIRFRKJmVuY3J5cHRlZEFkSWQ9QTA1NDgzOTExSVNaVldSVVRGOE85JndpZGdldE5hbWU9c3BfYXRmJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ==
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/81gC9ykOiML._SX450_.jpg
+  mrp: 37000
+  display_size: 43
+  screen_type: LED
+  resolution: UHD
+  waranty: 1
+  smart_tv: true
+
+- name: Samsung 50 inch 4K UHD LED Smart TV
+  price: 46998
+  brand: Samsung
+  link: https://www.amazon.in/Samsung-Inches-Ultra-Smart-UA50NU7090KXXL/dp/B07RSYF1ZK/ref=sr_1_2_sspa?keywords=led+tv&qid=1582645921&sr=8-2-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEzRE5ORzBKV0pPSDFQJmVuY3J5cHRlZElkPUEwMTU5NTIzMko1UlM0MTZaVjdIUCZlbmNyeXB0ZWRBZElkPUEwNDYwNTczMVNPWk9DTDRNTTNFUCZ3aWRnZXROYW1lPXNwX2F0ZiZhY3Rpb249Y2xpY2tSZWRpcmVjdCZkb05vdExvZ0NsaWNrPXRydWU=
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/81FUCIyIoKL._SX355_.jpg
+  mrp: 51000
+  display_size: 50
+  screen_type: LED
+  resolution: UHD
+  waranty: 1
+  smart_tv: true
+
+
+- name: OnePlus 55 inch QLED TV
+  price: 69899
+  brand: OnePlus
+  link: https://www.amazon.in/OnePlus-Certified-Android-55Q1IN-1-Without/dp/B07W5QZQ45/ref=sr_1_3?keywords=oneplus+led+tv&qid=1582646317&sr=8-3
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/71EO3uGdJbL._SX450_.jpg
+  mrp: 75000
+  display_size: 55
+  screen_type: QLED
+  resolution: UHD
+  waranty: 1
+  smart_tv: true
+
+
+- name: Mi 32 inch HD Ready LED TV
+  price: 12499
+  brand: Xiomi
+  link: https://www.amazon.in/Mi-LED-Ready-Android-Black/dp/B07HB7SSPZ/ref=sr_1_3?keywords=led+tv&qid=1582645921&sr=8-3
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/81kQE0OhMlL._SX450_.jpg
+  mrp: 13500
+  display_size: 32
+  screen_type: LED
+  resolution: HD
+  waranty: 1
+  smart_tv: false
+
+- name: Mi 50 inch 4K UHD LED Android TV
+  price: 29999
+  brand: Xiomi
+  link: https://www.amazon.in/Mi-125-7-Inches-Ultra-Android/dp/B07X841RGL/ref=sr_1_4?keywords=mi+led+tv&qid=1582646331&sr=8-4
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/719LqtDQDWL._SX450_.jpg
+  mrp: 32000
+  display_size: 50
+  screen_type: LED
+  resolution: UHD
+  waranty: 1
+  smart_tv: false
+
+- name: Mi 43 inch FHD LED Android TV
+  price: 21999
+  brand: Xiomi
+  link: https://www.amazon.in/Mi-LED-Full-Android-Black/dp/B07T89Z35Z/ref=sr_1_5?keywords=mi+led&qid=1582820856&sr=8-5
+  imageUrl: https://images-na.ssl-images-amazon.com/images/I/81ulud8aUaL._SX450_.jpg
+  mrp: 25000
+  display_size: 43
+  screen_type: LED
+  resolution: FHD
+  waranty: 1
+  smart_tv: false
