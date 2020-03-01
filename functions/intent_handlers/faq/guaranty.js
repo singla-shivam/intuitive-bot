@@ -1,5 +1,5 @@
 const {findProductsByTags} = require('./../../database/product')
-
+const {checkTV, clarifyProductForFAQ, setContextForCartConfirm, getAllTags} = require('../../utils')
 /**
  *
  * @param {WebhookClient} agent
@@ -7,8 +7,15 @@ const {findProductsByTags} = require('./../../database/product')
  */
 async function handleGuarantyIntent(agent) {
   console.log("guaranty Invoked", JSON.stringify(agent.parameters))
-  const {tags, ordinal} = agent.parameters
+  const tags = getAllTags(agent.parameters.tags, agent.parameters.newTags)
+  if(!checkTV(tags)) {
+    agent.add("FAQ are supported only on TV")
+    return
+  }
+  const ordinal = agent.parameters.ordinal
   const products = await findProductsByTags(tags)
+  let quantity = agent.parameters.quantity
+  quantity = quantity === '' ? undefined : quantity
 
   const index = (!ordinal || ordinal > products.length)
     ? undefined
@@ -17,14 +24,10 @@ async function handleGuarantyIntent(agent) {
   // if the ordinal was passed or only one product was fetched using the passed tags
   if (index !== undefined || products.length === 1) {
     let product = products[index || 0]
-    agent.add(`The guarantee of ${product.name} is one year.`)
+    agent.add(`The product comes with warranty of one year.`)
+    setContextForCartConfirm(agent, tags, quantity, ordinal)
   } else {
-    // if there is no product
-    if (products.length === 0) agent.add('Which product you are talking about?')
-    else {
-      // if there are more than one products
-      // TODO handle this
-    }
+    clarifyProductForFAQ(agent, tags, quantity, 'faq', 'guaranty')
   }
 }
 
