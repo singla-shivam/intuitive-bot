@@ -16,7 +16,15 @@ const {cartDisplay} = require('./intent_handlers/cart/cartDisplay')
 const {updateEntityOnProductAdd} = require('./entities/tag')
 const {extraTagsReceiver} = require('./intent_handlers/genericMethods/extraTagsReceiver')
 const {cartChangeQty, cartRemoveItem, cartConfirmQty, clearCart} = require("./intent_handlers/cart/changeQty");
-// const {addProduct, findProductsByTags} = require('./database/product')
+
+// FAQ intents
+const {
+  handleGuarantyIntent,
+  handleWarrantyIntent,
+  handleDiscountIntent
+} = require('./intent_handlers/faq')
+
+const {findProductsByTagsRange} = require('./database/product')
 // const {getData} = require('./database/api')
 
 const admin = require('firebase-admin')
@@ -64,6 +72,11 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   intentMap.set('Orders.place - yes', placeOrder)
   intentMap.set('Orders.status', getOrderStatus)
 
+  // FAQ
+  intentMap.set('faq.guaranty', handleGuarantyIntent)
+  intentMap.set('faq.warranty', handleWarrantyIntent)
+  intentMap.set('faq.discount', handleDiscountIntent)
+
   // intentMap.set('your intent name here', yourFunctionHandler);
   // intentMap.set('your intent name here', googleAssistantHandler);
   await agent.handleRequest(intentMap);
@@ -86,10 +99,8 @@ exports.addData = functions.https.onRequest(async (req, res) => {
 
 exports.test = functions.https.onRequest(async (req, res) => {
   if (req.query["key"] === "JJypXlJ0tvLq5tbgx8TA") {
-    await updateEntityOnProductAdd({
-      name: "OnePlus 55 inch QLED TV",
-      price: 69899,
-      brand: "OnePlus"
-    })
+    let result = await findProductsByTagsRange(['TV', 'LG'], 'price', 90000, 40000)
+    console.log(JSON.stringify(result))
+    res.send(result)
   }
 })

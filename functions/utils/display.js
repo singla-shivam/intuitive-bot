@@ -1,6 +1,6 @@
 // import {OptionItems} from "actions-on-google/src/service/actionssdk/conversation/helper/option/option";
 
-const {Carousel, Image, DialogflowConversation, BasicCard, List} = require('actions-on-google');
+const {BrowseCarousel, BrowseCarouselItem, Image, DialogflowConversation, BasicCard, List} = require('actions-on-google');
 const {getFormattedDate} = require('../utils');
 
 
@@ -9,17 +9,17 @@ const {getFormattedDate} = require('../utils');
  * @param {WebhookClient} agent
  * @param {Product | Product[]} products
  * @param {string} message - the message to be shown before the carousel
+ * @param {number[]} [quantities=undefined]
  */
-function showCarousel(agent, products, message) {
+function showCarousel(agent, products, message, quantities = undefined) {
   if (!Array.isArray(products)) {
     // if there is only product no need to show carousel
     showProductCard(agent, /** @type Product*/ products, message)
-  } else if (products.length === 0) showProductCard(agent, /** @type Product*/ products[0], message)
+  } else if (products.length === 0) showProductCard(agent, /** @type Product*/ products[0], message, quantities ? quantities[0] : undefined)
   else {
-    let items = _createOptionItems(products)
+    let items = _createOptionItems(products, quantities)
 
-    _startConv(agent, message, new Carousel({
-      title: 'Ordered',
+    _startConv(agent, message, new BrowseCarousel({
       items
     }))
   }
@@ -30,8 +30,9 @@ function showCarousel(agent, products, message) {
  * @param {WebhookClient} agent
  * @param {Product} product
  * @param {string} message
+ * @param {number} quantity
  */
-function showProductCard(agent, product, message) {
+function showProductCard(agent, product, message, quantity) {
   let card = new BasicCard({
     title: product.name,
     image: new Image({
@@ -76,20 +77,23 @@ function showListOfOrders(agent, order, products) {
 
 /**
  * @param {Product[]} products
- * @returns {OptionItems}
+ * @param {number[]} [quantities=undefined]
+ * @returns {BrowseCarouselItem[]}
  * @private
  */
-function _createOptionItems(products) {
-  let items = {}
+function _createOptionItems(products, quantities = undefined) {
+  let items = []
 
-  products.forEach(product => {
-    items[product.product_id] = {
+  products.forEach((product, i) => {
+    items.push(new BrowseCarouselItem({
       title: product.name,
-      description: product.name,
+      url: product.link,
+      description: `Price: ${product.price} ${quantities ? "Quantity: " + quantities[i] : ''}`,
       image: new Image({
         url: product.imageUrl,
+        alt: product.name
       })
-    }
+    }))
   })
 
   return items
