@@ -108,7 +108,7 @@ function setContextForCartConfirm(agent, tags, quantity, ordinal) {
  */
 function checkTV(tags) {
   for(let i = 0, len = tags.length; i < len; i++) {
-    if(checkTV[i] === 'TV') return true
+    if(tags[i] === 'TV') return true
   }
   return false
 }

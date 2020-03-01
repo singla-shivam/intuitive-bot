@@ -21,7 +21,8 @@ const {cartChangeQty, cartRemoveItem, cartConfirmQty, clearCart} = require("./in
 const {
   handleGuarantyIntent,
   handleWarrantyIntent,
-  handleDiscountIntent
+  handleDiscountIntent,
+  handleYoutubeIntent
 } = require('./intent_handlers/faq')
 
 const {findProductsByTagsRange} = require('./database/product')
@@ -76,6 +77,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   intentMap.set('faq.guaranty', handleGuarantyIntent)
   intentMap.set('faq.warranty', handleWarrantyIntent)
   intentMap.set('faq.discount', handleDiscountIntent)
+  intentMap.set('faq.youtube', handleYoutubeIntent)
 
   // intentMap.set('your intent name here', yourFunctionHandler);
   // intentMap.set('your intent name here', googleAssistantHandler);

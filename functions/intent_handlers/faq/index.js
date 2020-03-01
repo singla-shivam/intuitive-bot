@@ -3,6 +3,7 @@
 const {handleGuarantyIntent} = require('./guaranty')
 const {handleWarrantyIntent} = require('./warranty')
 const {handleDiscountIntent} = require('./discount')
+const {handleYoutubeIntent} = require('./youtube')
 
 async function handleFaq(agent) {
   switch (agent.parameters.subAction) {
@@ -18,7 +19,11 @@ async function handleFaq(agent) {
       await handleWarrantyIntent(agent)
       break
     }
+    case 'youtube': {
+      await handleYoutubeIntent(agent)
+      break
+    }
   }
 }
 
-module.exports = {handleFaq, handleGuarantyIntent, handleWarrantyIntent, handleDiscountIntent}
+module.exports = {handleFaq, handleGuarantyIntent, handleWarrantyIntent, handleDiscountIntent, handleYoutubeIntent}

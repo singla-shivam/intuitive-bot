@@ -47,11 +47,7 @@ exports.clarifyWhichProduct = async function (agent, products, params) {
       response = (`I have found a few products from our store.`)
     }
     let productDetails = await getProducts(products.map((item) => item.product_id))
-    for (let i = 0; i < Math.min(6, products.length); i++) {
-      agent.add(`${i + 1}. ${productDetails[i].name}`)
-    }
-    //showCarousel(agent, productDetails.slice(0, 7), response)
-    agent.add(response)
+    showCarousel(agent, productDetails.slice(0, 7), response)
     if (products.length > 5) {
       agent.add(`Do you prefer any specific brand?`)
       let brands = _extractBrands(productDetails)
