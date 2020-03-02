@@ -22,7 +22,12 @@ const {
   handleGuarantyIntent,
   handleWarrantyIntent,
   handleDiscountIntent,
-  handleYoutubeIntent
+  handleYoutubeIntent,
+  handleScreenSizeIntent,
+  handleScreenResolutionIntent,
+  handleBrandIntent,
+  handleCostIntent,
+  handleColorIntent
 } = require('./intent_handlers/faq')
 
 const {findProductsByTagsRange} = require('./database/product')
@@ -78,6 +83,11 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   intentMap.set('faq.warranty', handleWarrantyIntent)
   intentMap.set('faq.discount', handleDiscountIntent)
   intentMap.set('faq.youtube', handleYoutubeIntent)
+  intentMap.set('faq.screen-size', handleScreenSizeIntent)
+  intentMap.set('faq.screen-resolution', handleScreenResolutionIntent)
+  intentMap.set('faq.brand', handleBrandIntent)
+  intentMap.set('faq.cost', handleCostIntent)
+  intentMap.set('faq.color', handleColorIntent)
 
   // intentMap.set('your intent name here', yourFunctionHandler);
   // intentMap.set('your intent name here', googleAssistantHandler);

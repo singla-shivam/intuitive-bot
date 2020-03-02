@@ -7,8 +7,8 @@ const {Suggestion} = require('dialogflow-fulfillment')
  * @param {WebhookClient} agent
  * @return {Promise<void>}
  */
-async function handleDiscountIntent(agent) {
-  console.log("discount Invoked", JSON.stringify(agent.parameters))
+async function handleScreenSizeIntent(agent) {
+  console.log("screen-size", JSON.stringify(agent.parameters))
   const ordinal = agent.parameters.ordinal
   let quantity = agent.parameters.quantity
   quantity = quantity === '' ? undefined : quantity
@@ -26,16 +26,12 @@ async function handleDiscountIntent(agent) {
   // if the ordinal was passed or only one product was fetched using the passed tags
   if (index !== undefined || products.length === 1) {
     let product = products[index || 0]
-    showFAQMessage(agent, `The discount on ${product.name} is Rs.${product.mrp - product.price}(${_calculateDiscount(product.mrp, product.price)}%). The MRP in Rs.${product.mrp}`)
+    showFAQMessage(agent, `The screen size of ${product.name} is ${product.display_size}`)
     agent.add(new Suggestion('Add to cart'))
     setContextForCartConfirm(agent, tags, quantity, ordinal)
   } else {
-    clarifyProductForFAQ(agent, tags, quantity, 'faq', 'discount')
+    clarifyProductForFAQ(agent, tags, quantity, 'faq', 'screen-size')
   }
 }
 
-function _calculateDiscount(marketPrice, sellingPrice ) {
-  return Math.ceil((marketPrice - sellingPrice) * 100 / marketPrice)
-}
-
-module.exports = {handleDiscountIntent}
+module.exports = {handleScreenSizeIntent}
