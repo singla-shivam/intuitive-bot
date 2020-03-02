@@ -6,9 +6,10 @@ const {handleDiscountIntent} = require('./discount')
 const {handleYoutubeIntent} = require('./youtube')
 const {handleScreenSizeIntent} = require('./screen-size')
 const {handleScreenResolutionIntent} = require('./screen-resolution')
-const {handleBrandIntent} = require('./brand')
-const {handleCostIntent} = require('./cost')
+const {handleBuildQualityIntent} = require('./build-quality')
+const {handleConnectivityIntent} = require('./connectivity')
 const {handleColorIntent} = require('./color')
+const {handleScreenShareIntent} = require('./screen-share')
 
 async function handleFaq(agent) {
   switch (agent.parameters.subAction) {
@@ -36,12 +37,16 @@ async function handleFaq(agent) {
       await handleScreenResolutionIntent(agent)
       break
     }
-    case 'brand': {
-      await handleBrandIntent(agent)
+    case 'screen-share': {
+      await handleScreenShareIntent(agent)
       break
     }
-    case 'cost': {
-      await handleCostIntent(agent)
+    case 'build-quality': {
+      await handleBuildQualityIntent(agent)
+      break
+    }
+    case 'connectivity': {
+      await handleConnectivityIntent(agent)
       break
     }
     case 'color': {
@@ -59,7 +64,8 @@ module.exports = {
   handleYoutubeIntent,
   handleScreenSizeIntent,
   handleScreenResolutionIntent,
-  handleBrandIntent,
-  handleCostIntent,
-  handleColorIntent
+  handleBuildQualityIntent,
+  handleConnectivityIntent,
+  handleColorIntent,
+  handleScreenShareIntent
 }

@@ -1,5 +1,5 @@
 const {findProductsByTags} = require('./../../database/product')
-const {getAllTags, checkTV, showFAQMessage, clarifyProductForFAQ, setContextForCartConfirm} = require('../../utils')
+const {getAllTags, checkTV, showFAQMessage, clarifyProductForFAQ, setContextForCartConfirm, getOrdinal} = require('../../utils')
 const {Suggestion} = require('dialogflow-fulfillment')
 
 /**
@@ -7,9 +7,9 @@ const {Suggestion} = require('dialogflow-fulfillment')
  * @param {WebhookClient} agent
  * @return {Promise<void>}
  */
-async function handleCostIntent(agent) {
-  console.log("cost Invoked", JSON.stringify(agent.parameters))
-  const ordinal = agent.parameters.ordinal
+async function handleScreenShareIntent(agent) {
+  console.log("screen-share Invoked", JSON.stringify(agent.parameters))
+  const ordinal = getOrdinal(agent)
   let quantity = agent.parameters.quantity
   quantity = quantity === '' ? undefined : quantity
   const tags = getAllTags(agent.parameters.tags, agent.parameters.newTags)
@@ -26,12 +26,12 @@ async function handleCostIntent(agent) {
   // if the ordinal was passed or only one product was fetched using the passed tags
   if (index !== undefined || products.length === 1) {
     let product = products[index || 0]
-    showFAQMessage(agent, `The cost of ${product.name} is Rs.${product.price}`)
+    showFAQMessage(agent, `Yes, you can easily share you phone, laptop, etc. screen to ${product.name}`)
     agent.add(new Suggestion('Add to cart'))
-    setContextForCartConfirm(agent, tags, quantity, ordinal)
+    setContextForCartConfirm(agent, tags, quantity, ordinal, 'faq', 'screen-share')
   } else {
-    clarifyProductForFAQ(agent, tags, quantity, 'faq', 'cost')
+    clarifyProductForFAQ(agent, tags, quantity, 'faq', 'screen-share')
   }
 }
 
-module.exports = {handleCostIntent}
+module.exports = {handleScreenShareIntent}

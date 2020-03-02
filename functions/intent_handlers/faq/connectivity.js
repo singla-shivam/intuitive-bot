@@ -7,8 +7,8 @@ const {Suggestion} = require('dialogflow-fulfillment')
  * @param {WebhookClient} agent
  * @return {Promise<void>}
  */
-async function handleColorIntent(agent) {
-  console.log("color Invoked", JSON.stringify(agent.parameters))
+async function handleConnectivityIntent(agent) {
+  console.log("connectivity Invoked", JSON.stringify(agent.parameters))
   const ordinal = getOrdinal(agent)
   let quantity = agent.parameters.quantity
   quantity = quantity === '' ? undefined : quantity
@@ -26,12 +26,14 @@ async function handleColorIntent(agent) {
   // if the ordinal was passed or only one product was fetched using the passed tags
   if (index !== undefined || products.length === 1) {
     let product = products[index || 0]
-    showFAQMessage(agent, `The color of ${product.name} is black.`)
+    showFAQMessage(agent, `Yes, ${product.name} has HDMI and USB ports. It supports cable TV connection.`)
+    if(product.smart_tv) agent.add('You can also connect it to Wi-Fi.')
+    else agent.add('However, this TV can not be connected to the Internet.')
     agent.add(new Suggestion('Add to cart'))
-    setContextForCartConfirm(agent, tags, quantity, ordinal, 'faq', 'color')
+    setContextForCartConfirm(agent, tags, quantity, ordinal, 'faq', 'connectivity')
   } else {
-    clarifyProductForFAQ(agent, tags, quantity, 'faq', 'color')
+    clarifyProductForFAQ(agent, tags, quantity, 'faq', 'connectivity')
   }
 }
 
-module.exports = {handleColorIntent}
+module.exports = {handleConnectivityIntent}

@@ -48,7 +48,7 @@ function getAllTags(oldTags, newTags) {
  * @return {number}
  */
 function getOrdinal(agent) {
-  return agent.parameters.contextOrdinal ? agent.parameters.contextOrdinal : agent.parameters.ordinal
+  return agent.parameters.ordinal ? agent.parameters.ordinal : agent.parameters.contextOrdinal
 }
 
 /**
@@ -59,7 +59,6 @@ function getOrdinal(agent) {
  */
 function showFAQMessage(agent, response) {
   agent.add(response)
-  agent.add(new Suggestion('Add to cart?'))
 }
 
 /**
@@ -92,12 +91,21 @@ function clarifyProductForFAQ(agent, tags, quantity, action, subAction) {
  * @param {string[]} tags
  * @param {number} quantity
  * @param {number} ordinal
+ * @param {string} action
+ * @param {string} subAction
  */
-function setContextForCartConfirm(agent, tags, quantity, ordinal) {
+function setContextForCartConfirm(agent, tags, quantity, ordinal, action, subAction) {
   agent.context.set("discover_confirm_add_cart", 2, {
     tags,
     quantity,
     ordinal
+  })
+  agent.context.set("faq", 2, {
+    tags,
+    quantity,
+    ordinal,
+    action,
+    subAction
   })
 }
 

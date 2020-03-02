@@ -1,5 +1,5 @@
 const {findProductsByTags} = require('./../../database/product')
-const {getAllTags, checkTV, showFAQMessage, clarifyProductForFAQ, setContextForCartConfirm} = require('../../utils')
+const {getAllTags, checkTV, showFAQMessage, clarifyProductForFAQ, setContextForCartConfirm, getOrdinal} = require('../../utils')
 const {Suggestion} = require('dialogflow-fulfillment')
 
 /**
@@ -9,7 +9,7 @@ const {Suggestion} = require('dialogflow-fulfillment')
  */
 async function handleScreenResolutionIntent(agent) {
   console.log("screen-resolution Invoked", JSON.stringify(agent.parameters))
-  const ordinal = agent.parameters.ordinal
+  const ordinal = getOrdinal(agent)
   let quantity = agent.parameters.quantity
   quantity = quantity === '' ? undefined : quantity
   const tags = getAllTags(agent.parameters.tags, agent.parameters.newTags)
@@ -26,9 +26,9 @@ async function handleScreenResolutionIntent(agent) {
   // if the ordinal was passed or only one product was fetched using the passed tags
   if (index !== undefined || products.length === 1) {
     let product = products[index || 0]
-    showFAQMessage(agent, `The screen size of ${product.name} is ${product.resolution}`)
+    showFAQMessage(agent, `The screen resolution of ${product.name} is ${product.resolution}`)
     agent.add(new Suggestion('Add to cart'))
-    setContextForCartConfirm(agent, tags, quantity, ordinal)
+    setContextForCartConfirm(agent, tags, quantity, ordinal, 'faq', 'screen-resolution')
   } else {
     clarifyProductForFAQ(agent, tags, quantity, 'faq', 'screen-resolution')
   }

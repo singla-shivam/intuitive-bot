@@ -1,5 +1,5 @@
 const {findProductsByTags} = require('./../../database/product')
-const {checkTV, clarifyProductForFAQ, setContextForCartConfirm, getAllTags} = require('../../utils')
+const {checkTV, clarifyProductForFAQ, setContextForCartConfirm, getAllTags, getOrdinal} = require('../../utils')
 const {Suggestion} = require('dialogflow-fulfillment')
 /**
  *
@@ -14,7 +14,7 @@ async function handleYoutubeIntent(agent) {
     agent.add("FAQ are supported only on TV")
     return
   }
-  const ordinal = agent.parameters.ordinal
+  const ordinal = getOrdinal(agent)
   const products = await findProductsByTags(tags)
   let quantity = agent.parameters.quantity
   quantity = quantity === '' ? undefined : quantity
@@ -35,7 +35,7 @@ async function handleYoutubeIntent(agent) {
       agent.add(`No it does support`)
       new Suggestion('Show smart tvs')
     }
-    setContextForCartConfirm(agent, tags, quantity, ordinal)
+    setContextForCartConfirm(agent, tags, quantity, ordinal, 'faq', 'youtube')
   } else {
     clarifyProductForFAQ(agent, tags, quantity, 'faq', 'youtube')
   }

@@ -1,5 +1,5 @@
 const {findProductsByTags} = require('./../../database/product')
-const {checkTV, clarifyProductForFAQ, setContextForCartConfirm, getAllTags} = require('../../utils')
+const {checkTV, clarifyProductForFAQ, setContextForCartConfirm, getAllTags, getOrdinal} = require('../../utils')
 const {Suggestion} = require('dialogflow-fulfillment')
 /**
  *
@@ -8,7 +8,7 @@ const {Suggestion} = require('dialogflow-fulfillment')
  */
 async function handleWarrantyIntent(agent) {
   console.log("warranty Invoked", JSON.stringify(agent.parameters))
-  const ordinal = agent.parameters.ordinal
+  const ordinal = getOrdinal(agent)
   const tags = getAllTags(agent.parameters.tags, agent.parameters.newTags)
   if(!checkTV(tags)) {
     agent.add("FAQ are supported only on TV")
@@ -26,7 +26,7 @@ async function handleWarrantyIntent(agent) {
   if (index !== undefined || products.length === 1) {
     agent.add(`The product comes with warranty of one year.`)
     agent.add(new Suggestion('Add to cart'))
-    setContextForCartConfirm(agent, tags, quantity, ordinal)
+    setContextForCartConfirm(agent, tags, quantity, ordinal, 'faq', 'guaranty')
   } else {
     clarifyProductForFAQ(agent, tags, quantity, 'faq', 'guaranty')
   }
