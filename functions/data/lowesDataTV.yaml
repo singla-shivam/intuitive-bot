@@ -3,12 +3,12 @@
   brand: LG
   link: https://www.amazon.in/LG-inches-Smart-75UM7600PTA-Titanium/dp/B07STRHPC2/ref=sr_1_15?keywords=lg+led+tv&qid=1582820376&sr=8-15
   imageUrl: https://images-na.ssl-images-amazon.com/images/I/81f51uTEdLL._SX450_.jpg
-  mrp:
-  display_size:
-  screen_type:
-  resolution:
-  waranty:
-  smart_tv:
+  mrp: 189900
+  display_size: 75
+  screen_type: LED
+  resolution: UHD
+  waranty: 1
+  smart_tv: true
 
 - name: LG 49 inch 4K UHD LED Smart TV
   price: 63999

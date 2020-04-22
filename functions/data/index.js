@@ -4,7 +4,11 @@ const {firestore} = require('firebase-admin')
 
 async function addData() {
   /** @type Product[] */
-  const products = yaml.safeLoad(fs.readFileSync(`${__dirname}/lowesDataTV.yaml`, 'utf8'))
+  let products = yaml.safeLoad(fs.readFileSync(`${__dirname}/lowesDataTV.yaml`, 'utf8'))
+  products = [
+    ...products,
+    ...yaml.safeLoad(fs.readFileSync(`${__dirname}/lowesData.yaml`, 'utf8'))
+  ]
 
   const batch  = firestore().batch()
   products.forEach(product => {
