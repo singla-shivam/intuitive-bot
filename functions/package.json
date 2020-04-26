@@ -20,6 +20,7 @@
     "js-yaml": "^3.13.1"
   },
   "devDependencies": {
+    "@types/dialogflow": "^4.0.4",
     "firebase-functions-test": "^0.1.6"
   },
   "private": true

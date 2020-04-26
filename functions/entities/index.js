@@ -1,6 +1,7 @@
 const d = require('dialogflow')
 const yaml = require('js-yaml')
 const fs = require('fs')
+const { PROJECT_ID } = require('../constants')
 
 /**
  * @typedef Synonyms
@@ -17,7 +18,6 @@ const dialogueFlow = d
 const entitiesClient = new dialogueFlow.EntityTypesClient();
 
 // if you delete and create new entities please update their UUID's here
-const PROJECT_ID = 'intuitivebot'
 const TAG_ENTITY_ID = "56171131-b860-4fc9-b3bc-2af2ebc126b2"
 
 const agentPath = entitiesClient.projectAgentPath(PROJECT_ID)

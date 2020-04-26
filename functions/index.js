@@ -31,8 +31,7 @@ const {
   handleScreenShareIntent
 } = require('./intent_handlers/faq')
 
-const {findProductsByTagsRange} = require('./database/product')
-// const {getData} = require('./database/api')
+// tests
 
 const admin = require('firebase-admin')
 admin.initializeApp(functions.config().firebase)
@@ -113,8 +112,6 @@ exports.addData = functions.https.onRequest(async (req, res) => {
 
 exports.test = functions.https.onRequest(async (req, res) => {
   if (req.query["key"] === "JJypXlJ0tvLq5tbgx8TA") {
-    let result = await findProductsByTagsRange(['TV', 'LG'], 'price', 90000, 40000)
-    console.log(JSON.stringify(result))
-    res.send(result)
+    // createIntent()
   }
 })

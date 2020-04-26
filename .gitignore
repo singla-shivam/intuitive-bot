@@ -65,7 +65,7 @@ node_modules/
 .env
 
 # singla-shivam
-service-private-key.json
+*.key.json
 setPrivateKey.sh
 *.req.*
 
