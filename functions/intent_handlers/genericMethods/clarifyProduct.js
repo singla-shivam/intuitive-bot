@@ -35,6 +35,11 @@ exports.clarifyWhichProduct = async function (agent, products, params) {
         agent.add(`We don't have something like that in our store yet.`)
         params.tags = []
       }
+    } else if(params.action === 'faq') {
+      agent.add('Can you please say the product name again?')
+      if(tags.length !== 0) params.tags = []
+      agent.context.set("extra_tag_request", 2, params)
+      agent.context.set("faq", 2, params)
     }
   } else {
     // Customising replies based on calling
@@ -45,6 +50,8 @@ exports.clarifyWhichProduct = async function (agent, products, params) {
     } else if (params.action === "discovery") {
       // Display relevant products
       response = (`I have found a few products from our store.`)
+    } else if(params.action === 'faq') {
+      response = 'Which of the following items did you meant?'
     }
     let productDetails = await getProducts(products.map((item) => item.product_id))
     showCarousel(agent, productDetails.slice(0, 7), response)

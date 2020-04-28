@@ -19,16 +19,7 @@ const {cartChangeQty, cartRemoveItem, cartConfirmQty, clearCart} = require("./in
 
 // FAQ intents
 const {
-  handleGuarantyIntent,
-  handleWarrantyIntent,
-  handleDiscountIntent,
-  handleYoutubeIntent,
-  handleScreenSizeIntent,
-  handleScreenResolutionIntent,
-  handleBuildQualityIntent,
-  handleConnectivityIntent,
-  handleColorIntent,
-  handleScreenShareIntent
+  handleFaq,
 } = require('./intent_handlers/faq')
 
 // tests
@@ -79,16 +70,16 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
   intentMap.set('Orders.status', getOrderStatus)
 
   // FAQ
-  intentMap.set('faq.guaranty', handleGuarantyIntent)
-  intentMap.set('faq.warranty', handleWarrantyIntent)
-  intentMap.set('faq.discount', handleDiscountIntent)
-  intentMap.set('faq.youtube', handleYoutubeIntent)
-  intentMap.set('faq.screen-size', handleScreenSizeIntent)
-  intentMap.set('faq.screen-resolution', handleScreenResolutionIntent)
-  intentMap.set('faq.build-quality', handleBuildQualityIntent)
-  intentMap.set('faq.connectivity', handleConnectivityIntent)
-  intentMap.set('faq.color', handleColorIntent)
-  intentMap.set('faq.screen-share', handleScreenShareIntent)
+  intentMap.set('faq.guaranty', (agent) => handleFaq(agent, 'guaranty'))
+  intentMap.set('faq.warranty', (agent) => handleFaq(agent, 'warranty'))
+  intentMap.set('faq.discount', (agent) => handleFaq(agent, 'discount'))
+  intentMap.set('faq.youtube', (agent) => handleFaq(agent, 'youtube'))
+  intentMap.set('faq.screen-size', (agent) => handleFaq(agent, 'screen-size'))
+  intentMap.set('faq.screen-resolution', (agent) => handleFaq(agent, 'screen-resolution'))
+  intentMap.set('faq.build-quality', (agent) => handleFaq(agent, 'build-quality'))
+  intentMap.set('faq.connectivity', (agent) => handleFaq(agent, 'connectivity'))
+  intentMap.set('faq.color', (agent) => handleFaq(agent, 'color'))
+  intentMap.set('faq.screen-share', (agent) => handleFaq(agent, 'screen-share'))
 
   // intentMap.set('your intent name here', yourFunctionHandler);
   // intentMap.set('your intent name here', googleAssistantHandler);
