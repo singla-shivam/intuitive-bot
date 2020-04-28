@@ -12,25 +12,28 @@ async function handleScreenSizeIntent(agent) {
   const ordinal = getOrdinal(agent)
   let quantity = agent.parameters.quantity
   quantity = quantity === '' ? undefined : quantity
-  const tags = getAllTags(agent.parameters.tags, agent.parameters.newTags)
+  let tags = getAllTags(agent.parameters.tags, agent.parameters.newTags)
   if(!checkTV(tags)) {
     agent.add("FAQ are supported only on TV")
     return
   }
-  const products = await findProductsByTags(tags)
+  let products = await findProductsByTags(tags)
+  if(products.length === 0) {
+    tags = agent.parameters.tags = agent.parameters.newTags
+    delete agent.parameters.ordinal
+    products = await findProductsByTags(tags)
+  }
 
   const index = (!ordinal || ordinal > products.length)
     ? undefined
     : ordinal - 1
 
   // if the ordinal was passed or only one product was fetched using the passed tags
-  if (index !== undefined || products.length === 1) {
+  if (index !== undefined || await clarifyProductForFAQ(agent, tags, quantity, 'faq', 'discount' , products)) {
     let product = products[index || 0]
     showFAQMessage(agent, `The screen size of ${product.name} is ${product.display_size} inch.`)
     agent.add(new Suggestion('Add to cart'))
     setContextForCartConfirm(agent, tags, quantity, ordinal, 'faq', 'screen-size')
-  } else {
-    clarifyProductForFAQ(agent, tags, quantity, 'faq', 'screen-size')
   }
 }
 

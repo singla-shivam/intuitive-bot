@@ -31,7 +31,7 @@ function showCarousel(agent, products, message, quantities = undefined) {
  * @param {WebhookClient} agent
  * @param {Product} product
  * @param {string} message
- * @param {number} quantity
+ * @param {number} [quantity]
  */
 function showProductCard(agent, product, message, quantity) {
   let card = new BasicCard({

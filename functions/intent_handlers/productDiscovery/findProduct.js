@@ -7,6 +7,7 @@ const {findProductsByTags} = require("../../database/product")
  * This function is invoked when user gives his consent to add requested product to cart
  */
 exports.confirmCartAdd = async function (agent) {
+  console.log('confirmCartAdd', agent.parameters)
   let {tags, newQuantity, quantity, ordinal} = agent.parameters
   let products = await findProductsByTags(tags)
   // Update old quantity with new one if it present in query otherwise use the old one
@@ -35,10 +36,11 @@ exports.confirmCartAdd = async function (agent) {
  * This function is invoked when user wants to discover some products
  */
 exports.findProduct = async function (agent) {
-  console.log("findProduct Invoked");
+  console.log("findProduct Invoked", agent.parameters);
   let {tags, quantity, ordinal} = agent.parameters
   quantity = quantity === "" ? undefined : quantity
   let products = await findProductsByTags(tags)
+  console.log(products)
   // Index is not undefined when ordinal isn't empty and corresponds to a valid index.
   // Checking with !ordinal because it can be '' or undefined but never 0
   let index = !ordinal ? undefined : 0 <= ordinal - 1 < products.length ? ordinal - 1 : undefined

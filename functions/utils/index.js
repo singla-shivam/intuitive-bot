@@ -1,4 +1,6 @@
 const {Suggestion} = require('dialogflow-fulfillment')
+const {getProducts} = require("../database/product")
+const {showCarousel} = require("./display")
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 /**
@@ -68,21 +70,32 @@ function showFAQMessage(agent, response) {
  * @param {number} quantity
  * @param {string} action
  * @param {string} subAction
+ * @param {Product[]} products
  */
-function clarifyProductForFAQ(agent, tags, quantity, action, subAction) {
-  agent.add('Which product you are talking about?')
-  agent.context.set("extra_tag_request", 2, {
-    tags,
-    quantity: quantity,
-    action,
-    subAction
-  })
-  agent.context.set("faq", 2, {
-    tags,
-    quantity,
-    action,
-    subAction
-  })
+async function clarifyProductForFAQ(agent, tags, quantity, action, subAction, products) {
+  if(products.length === 1) return true
+  else if (products.length === 0) {
+    agent.add('Can you please say the product name again?')
+    if(tags.length !== 0) tags = []
+    agent.context.set("extra_tag_request", 2, {
+      tags,
+      quantity: quantity,
+      action,
+      subAction
+    })
+    agent.context.set("faq", 2, {
+      tags,
+      quantity,
+      action,
+      subAction
+    })
+  }
+  else {
+    let response = 'Which of the following items did you meant?'
+    let productDetails = await getProducts(products.map((item) => item.product_id))
+    showCarousel(agent, productDetails.slice(0, 7), response)
+  }
+  return false
 }
 
 /**
