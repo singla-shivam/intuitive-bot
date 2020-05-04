@@ -26,8 +26,7 @@
 <style>
   body {
     margin: 0;
-    overflow: hidden;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     background-color: #21a168;
   }
 

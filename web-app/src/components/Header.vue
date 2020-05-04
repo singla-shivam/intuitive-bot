@@ -13,7 +13,7 @@
 <style scoped>
   .bg {
     width: 100%;
-    filter: brightness(0.5);
+    filter: brightness(0.3);
     position: fixed;
     bottom: -10%;
   }
@@ -24,6 +24,11 @@
       width: unset;
       bottom: 0;
       top: 0;
+    }
+  }
+  @media only screen and (max-width: 1000px) {
+    .bg {
+      bottom: 0;
     }
   }
 </style>

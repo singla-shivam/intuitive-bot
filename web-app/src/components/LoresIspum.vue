@@ -1,15 +1,17 @@
 <template>
   <div class="lores">
-    A robot is a machine—especially one programmable by a computer— capable of carrying out a complex series of actions
-    automatically.[2] Robots can be guided by an external control device or the control may be embedded within. Robots
-    may be constructed on the lines of human form, but most robots are machines designed to perform a task with no
-    regard to their aesthetics.
-    Robots can be autonomous or semi-autonomous and range from humanoids such as Honda's Advanced Step in Innovative
-    Mobility (ASIMO) and TOSY's TOSY Ping Pong Playing Robot (TOPIO) to industrial robots, medical operating robots,
-    patient assist robots, dog therapy robots, collectively programmed swarm robots, UAV drones such as General Atomics
-    MQ-1 Predator, and even microscopic nano robots. By mimicking a lifelike appearance or automating movements, a robot
-    may convey a sense of intelligence or thought of its own. Autonomous things are expected to proliferate in the
-    coming decade,[3] with home robotics and the autonomous car as some of the main drivers.[4]
+    Here are a few things that you can say to the bot -
+    <ul>
+      <li>What do you sell</li>
+      <li>I am looking for a tv</li>
+      <li>What is screen resolution of second tv from samsung</li>
+      <li>How much warranty do I get on this 55 inch LG tv</li>
+      <li>I would like it buy it</li>
+      <li>Show my cart</li>
+      <li>Remove tv from cart</li>
+      <li>Change quantity of fridge to 2</li>
+      <li>When will my order be delivered?</li>
+    </ul>
   </div>
 </template>
 

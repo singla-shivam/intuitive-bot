@@ -36,8 +36,8 @@
   }
 
   .titles {
-    font-size: 28px;
-    font-weight: bold;
+    font-size: 2rem;
+    font-weight: 700;
     padding-bottom: 16px;
   }
 </style>

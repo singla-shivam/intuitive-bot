@@ -35,7 +35,6 @@
 <style scoped>
   .info {
     max-width: calc(100% - 450px);
-    display: inline-block;
     position: relative;
     color: #fff;
     top: calc(100% - 40px);

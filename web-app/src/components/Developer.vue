@@ -15,7 +15,6 @@
 
 <style scoped>
   .developer {
-    display: inline-block;
     padding-right: 32px;
   }
 
@@ -28,9 +27,9 @@
   .name {
     color: #fff;
     text-decoration: none;
-    margin-left: 8px;
     top: -11px;
     position: relative;
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: 700;
   }
 </style>
