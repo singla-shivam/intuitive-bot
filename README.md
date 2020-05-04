@@ -14,6 +14,8 @@ There are two parts of the project which -
 * The backend to be deployed on Firebase Cloud Functions
 * The Dialogflow flow data to be deployed to Dialogflow
 
+First deploy on Firebase Cloud Functions and then on Dialogflow.
+
 The instructions to deploy dialogflow is in respective folders.
 * [dialogflow](./dialogflow)
 
