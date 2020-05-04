@@ -14,5 +14,5 @@
 * Choose the zip file [dialogflow.zip](./dialogflow.zip)
 * Type IMPORT to confirm
 
-**Note** - You will have to enable billing for the 
+**Note** - You will have to enable billing for the project. [See here](https://cloud.google.com/billing/docs/how-to/manage-billing-account#create_a_new_billing_account)
 
